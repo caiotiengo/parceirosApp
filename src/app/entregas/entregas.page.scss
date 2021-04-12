@@ -1,0 +1,75 @@
+.main{
+    padding: 10px;
+    .endrecoEntrega{
+        label{
+            margin:0 0 0 4px;
+        }
+        input{
+            width: 100%;
+            border: solid 3px #f1f5f8;
+            height: 45px;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        ::placeholder{
+            margin-left: 5px ;
+        }
+        ::-webkit-input-placeholder{
+            margin-left: 5px ;
+
+        }
+    }
+    ion-grid{
+        ion-icon{
+            font-size: 20px;
+            border: solid 1px #ffc107;
+            border-radius: 20px;
+            padding: 6px;
+            margin-left: -9px;
+            background: #ffc107;
+        }
+        padding-left: 0;
+        padding-right: 0;
+        ion-select{
+            border-radius: 10px;
+            border: solid 1px #f1f5f8;
+            background: #f1f5f8;
+            width: 100%;
+        }
+    }
+
+}
+ion-footer{
+    background: #f1f5f8;
+    border-top: solid 1px #ffc107;
+}
+.vl{
+    border-left: 5px solid #ffc107;
+    top: 0;
+    margin-left: 5px;
+    height: 60%;
+}
+.loja-label{
+    background: #4caf50;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    opacity: 0.7;
+    width: 25%;
+    margin-top: 2%;
+}
+.del-label{
+    background: #f44336;
+    color: white;
+    padding: 6px;
+    text-align: center;
+    border-radius: 5px;
+    width: 52%;
+    margin-top: 2%;
+}
+.required{
+    font-size: 10px;
+    color: red;
+}

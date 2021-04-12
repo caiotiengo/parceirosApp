@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager #mySlider class="slides" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
+    <ion-slide>
+      <img src="assets/1.png">
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/2.png">
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/3.png">
+    </ion-slide>
+  </ion-slides>
+
+  <ion-button (click)="telaLogin()" color="axe" expand="block" style="bottom: 22px;">Entrar no App</ion-button>
+  <ion-button (click)="telaCadastro()" color="dark" fill="outline" expand="block" style="bottom: 22px;">Cadastre a sua Loja</ion-button>
+
+</ion-content>

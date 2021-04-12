@@ -1,5 +1,7 @@
 {
   "name": "parceirosApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

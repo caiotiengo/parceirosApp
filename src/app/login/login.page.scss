@@ -1,0 +1,41 @@
+ion-header, ion-content, ion-toolbar{
+    --background: #f1f5f8 ;
+
+}
+.main{
+    padding: 20px;
+}
+.email-div, .senha-div{
+    margin-top: 5px;
+
+    label{
+        margin:0 0 0 4px;
+    }
+    input{
+        width: 100%;
+        border: solid 3px #f1f5f8;
+        height: 45px;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 5px;
+        box-shadow: 0px 0px 1px 1px rgb(211 211 211 / 35%);
+    }
+    ::placeholder{
+        margin-left: 5px ;
+    }
+    ::-webkit-input-placeholder{
+        margin-left: 5px ;
+
+    }
+}
+.dizeres-top{
+    h4{
+        font-size: 16px;
+        font-weight: 700;
+    }
+    p{
+        color: gray;
+        font-size: 12px;
+    }
+    
+}

@@ -1,0 +1,181 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-avatar slot="start">
+      <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEQlAHYHJmy3w/company-logo_200_200/0/1598197905782?e=2159024400&v=beta&t=0VgjH8MCOyIXS-4kvzE1wb6J9sPgHpGpdlVoVgE6MS0">
+
+    </ion-avatar>
+    <ion-buttons slot="end">
+      <ion-button class="bordered" fill="solid" color="light">
+        <ion-icon color="primary" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+    </ion-avatar>
+    <ion-label>
+        <p>Olá,</p>
+        <h3>Orixá da Serra</h3>
+    </ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+ <div class="slides ion-margin-bottom">
+   <ion-slides [options]="slidesOptions">
+     <ion-slide>
+      <ion-card>
+        <ion-card-header>
+          <div class="main">
+            <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEQlAHYHJmy3w/company-logo_200_200/0/1598197905782?e=2159024400&v=beta&t=0VgjH8MCOyIXS-4kvzE1wb6J9sPgHpGpdlVoVgE6MS0">
+          </div>
+        </ion-card-header>
+      
+        <ion-card-content class="ion-text-left">
+          <ion-card-title class="ion-margin-bottom">1 Entrega</ion-card-title>
+
+          <ion-card-subtitle class="ion-text-right">Aguardando resposta</ion-card-subtitle>
+          <ion-progress-bar type="indeterminate" value="0.5" color="primary"></ion-progress-bar>
+        </ion-card-content>
+      </ion-card>
+      
+     </ion-slide>
+     <ion-slide>
+      <ion-card>
+        <ion-card-header>
+          <div class="main">
+            <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEQlAHYHJmy3w/company-logo_200_200/0/1598197905782?e=2159024400&v=beta&t=0VgjH8MCOyIXS-4kvzE1wb6J9sPgHpGpdlVoVgE6MS0">
+          </div>
+        </ion-card-header>
+      
+        <ion-card-content class="ion-text-left">
+          <ion-card-title class="ion-margin-bottom">2 Entrega</ion-card-title>
+
+          <ion-card-subtitle class="ion-text-right">Aguardando resposta</ion-card-subtitle>
+          <ion-progress-bar type="indeterminate" value="0.5" color="primary"></ion-progress-bar>
+        </ion-card-content>
+      </ion-card>
+      
+     </ion-slide>
+   </ion-slides>
+ </div>
+
+<div class="container">
+  <h2>Menu</h2>
+  <ion-item (click)="entregasPage()" lines="none">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only" name="bicycle-outline"></ion-icon>
+          </ion-button> 
+  
+        </ion-col>
+        <ion-col size="7">
+          <ion-label>
+            <h4>
+              Entregas
+            </h4>
+            <h6>
+             Peça já um entregador!
+            </h6>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only"  name="chevron-forward-outline"></ion-icon>
+          </ion-button> 
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+  </ion-item>
+  <ion-item (click)="ganhosPage()" lines="none">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only" name="cash-outline"></ion-icon>
+          </ion-button> 
+  
+        </ion-col>
+        <ion-col size="7">
+          <ion-label>
+            <h4>
+              Conta Axé
+            </h4>
+            <h6>
+              Veja a sua conta!
+            </h6>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only"  name="chevron-forward-outline"></ion-icon>
+          </ion-button> 
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+  </ion-item>
+  <ion-item (click)="produtosPage()" lines="none">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only" name="bag-outline"></ion-icon>
+          </ion-button> 
+  
+        </ion-col>
+        <ion-col size="7">
+          <ion-label>
+            <h4>
+              Produtos
+            </h4>
+            <h6>
+             Veja os seus produtos!
+            </h6>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only"  name="chevron-forward-outline"></ion-icon>
+          </ion-button> 
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+  </ion-item>
+  <ion-item (click)="editarPage()" lines="none">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only" name="cog-outline"></ion-icon>
+          </ion-button> 
+  
+        </ion-col>
+        <ion-col size="7">
+          <ion-label>
+            <h4>
+              Editar sua loja
+            </h4>
+            <h6>
+             Edite dados cadastrais!
+            </h6>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only"  name="chevron-forward-outline"></ion-icon>
+          </ion-button> 
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+  </ion-item>
+</div>
+
+</ion-content>

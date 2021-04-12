@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "axedelivery-1": {
+      "hosting": {
+        "app": [
+          "axedelivery-1"
+        ]
+      }
+    }
+  }
+}
