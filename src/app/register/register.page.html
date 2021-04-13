@@ -3,29 +3,25 @@
     <!--ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons-->
-    <ion-title slot="end" [hidden]="started">Cadastro</ion-title>
-    <ion-title slot="end" [hidden]="primeiraDiv">1</ion-title>
-    <ion-title slot="end" [hidden]="segundaDiv">2</ion-title>
-    <ion-title slot="end" [hidden]="terceiraDiv">3</ion-title>
-    <ion-title slot="end" [hidden]="quartaDiv">4</ion-title>
+
 
   </ion-toolbar>
 </ion-header>
 <ion-fab vertical="top" horizontal="start" slot="fixed">
   <ion-fab-button color="dark" (click)="voltar()"  [hidden]="started">
-    <ion-icon  name="chevron-back-circle-outline"></ion-icon>
+    <ion-icon  name="arrow-back-outline"></ion-icon>
   </ion-fab-button>
   <ion-fab-button color="dark" (click)="iniciar()"  [hidden]="primeiraDiv">
-    <ion-icon  name="chevron-back-circle-outline"></ion-icon>
+    <ion-icon  name="arrow-back-outline"></ion-icon> 
   </ion-fab-button>
   <ion-fab-button color="dark" (click)="primeiroPasso()"  [hidden]="segundaDiv">
-    <ion-icon  name="chevron-back-circle-outline"></ion-icon>
+    <ion-icon  name="arrow-back-outline"></ion-icon> 1
   </ion-fab-button>
   <ion-fab-button color="dark" (click)="segundoPasso()"  [hidden]="terceiraDiv">
-    <ion-icon  name="chevron-back-circle-outline"></ion-icon>
+    <ion-icon  name="arrow-back-outline"></ion-icon> 2
   </ion-fab-button>
   <ion-fab-button color="dark" (click)="terceiroPasso()"  [hidden]="quartaDiv">
-    <ion-icon  name="chevron-back-circle-outline"></ion-icon>
+    <ion-icon  name="arrow-back-outline"></ion-icon> 3
   </ion-fab-button>
 </ion-fab>
 <ion-content>
@@ -50,7 +46,7 @@
       <input type="password" [(ngModel)]="senha"  placeholder="Digite aqui a senha da sua loja..." class="senhaInput">
       <label *ngIf="senha === undefined || senha === ''" class="required">* Senha é obrigatório </label>
     </div>
-    <ion-button expand="block" (click)="segundoPasso()" color="axe">Próximo</ion-button>
+    <ion-button expand="block" (click)="authenticacao()" color="axe">Próximo</ion-button>
 
   </div>
   <div [hidden]="segundaDiv" class="segunda-div">
@@ -79,7 +75,7 @@
     <div class="input-div">
       <label for="nome" class="rg">Orgão Emissor do RG</label>
       <input type="text" [(ngModel)]="orgaoEmissor"  placeholder="Preencha aqui o Orgão Emissor do RG..." class="emailInput">
-      <label *ngIf="RG === undefined || RG === ''" class="required">* Orgão Emissor é obrigatório </label>
+      <label *ngIf="orgaoEmissor === undefined || orgaoEmissor === ''" class="required">* Orgão Emissor é obrigatório </label>
     </div>
     <div class="input-div">
       <label for="nome" class="cpf">CPF do responsável</label>
@@ -96,17 +92,36 @@
         Terceiro, quase lá...
       </h4>
     </div>
-    <div class="input-div">
-      <label for="telefone" class="telefone">Whatsapp/Telefone</label>
-      <input type="text" [(ngModel)]="telefone" mask="(00)00000-0000"  placeholder="Digite aqui o telefone da loja..." class="senhaInput">
-      <label *ngIf="telefone === undefined || telefone === ''" class="required">* Telefone é obrigatório </label>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="input-div">
+            <label for="ddd" class="ddd">DDD</label>
+            <input type="text" [(ngModel)]="ddd" mask="00" maxlength="2"  placeholder="Digite aqui o ddd da loja..." class="senhaInput">
+            <label *ngIf="ddd === undefined || ddd === ''" class="required">* DDD é obrigatório </label>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="input-div">
+            <label for="telefone" class="telefone">Whatsapp/Telefone</label>
+            <input type="text" [(ngModel)]="telefone" mask="00000-0000"  placeholder="Digite aqui o telefone da loja..." class="senhaInput">
+            <label *ngIf="telefone === undefined || telefone === ''" class="required">* Telefone é obrigatório </label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    </div>
     <div class="input-div">
       <label for="endereco" class="endereco">Endereço da loja</label>
-      <input type="text" [(ngModel)]="endereco" placeholder="Digite aqui o e-mail da sua loja..." class="emailInput">
+      <input type="text"
+      [(ngModel)]="autocomplete.input" (keyup)="UpdateSearchResults($event)" 
+      placeholder="Digite aqui o e-mail da sua loja..." value="{{endereco}}" class="emailInput">
       <label *ngIf="endereco === undefined || endereco === ''" class="required">* Endereço da loja é obrigatório </label>
-
+      <ion-list [hidden]="autocompleteItems.length == 0 || hide">
+        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
+          {{ item.description }}
+        </ion-item>
+      </ion-list>
     </div>
     <div class="input-div">
       <label for="numero" class="numero">Número</label>
@@ -169,13 +184,43 @@
       <h4>
         Quarto, para finalizar...
       </h4>
-      <p>Dados bancários da loja.</p>
+      <p>Dados da loja.</p>
+    </div>
+    <div class="input-div">
+      <label for="loja" class="loja">Nome da Loja</label>
+      <input placeholder="Digite aqui o Nome da Loja..." [(ngModel)]="nomeLoja" type="text">
+      <label *ngIf="nomeLoja === undefined || nomeLoja === ''" class="required">* Nome da Loja é obrigatório </label>
+
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="input-div">
+            <label for="horarioAbrir" class="horarioAbrir">Horário de abertura</label>
+            <ion-datetime displayFormat="HH:mm" placeholder="Clique aqui" [(ngModel)]="horarioAbrir"></ion-datetime>
+            <label *ngIf="horarioAbrir === undefined || horarioAbrir === ''" class="required">* Horário de abertura é obrigatório </label>
+          </div>          
+        </ion-col>
+        <ion-col>
+          <div class="input-div">
+            <label for="horarioFechar" class="horarioFechar">Horário de fechar</label>
+            <ion-datetime displayFormat="HH:mm" placeholder="Clique aqui" [(ngModel)]="horarioFechar"></ion-datetime>
+            <label *ngIf="horarioFechar === undefined || horarioFechar === ''" class="required">* Horário de fechar é obrigatório </label>
+          </div>          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="input-div">
+      <label for="cnpj" class="cnpj">CNPJ</label>
+      <input placeholder="Digite aqui o CNPJ da loja..."  maxlength="40" [brmasker]="{person: true}" [(ngModel)]="CNPJ" type="text">
+      <label *ngIf="banco === undefined || banco === ''" class="required">* CNPJ é obrigatório </label>
+
     </div>
     <ion-select placeholder="Escolha se é Corrente ou Poupança"  [(ngModel)]="correnteoupou">
       <ion-select-option value="Corrente">Corrente</ion-select-option>
       <ion-select-option value="Poupanca">Poupança</ion-select-option>
     </ion-select>
-    <label *ngIf="correnteoupou === undefined || correnteoupou === ''" class="required">* Agência é obrigatório </label>
+    <label *ngIf="correnteoupou === undefined || correnteoupou === ''" class="required">* Tipo de conta é obrigatório </label>
 
     <div class="input-div">
       <label for="banco" class="banco">Banco</label>
@@ -231,14 +276,47 @@
 			<ion-checkbox [(ngModel)]="check"></ion-checkbox>
 		</ion-item>
 		
-    <ion-button expand="block" (click)="finalizarCadastro()" color="axe">Finalizar Cadastro</ion-button>
+    <ion-button expand="block" (click)="quintoPasso()" color="axe">Finalizar Cadastro</ion-button>
 
   </div>
+  <div [hidden]="quintaDiv" class="quinta-div">
+    <div class="header-quinta">
+    <h4>Parabéns, sua loja foi cadastrada!</h4>
+    </div>
+    <!--ion-list>
 
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+        </ion-avatar>
+        <ion-label>
+          Avatar Start, Button Item
+        </ion-label>
+        <ion-button  slot="end">
+          Adicionar
+        </ion-button>
+        <!--ion-button *ngIf="" slot="end">
+          Adicionar
+        </ion-button>
+      </ion-item>
+    </ion-list-->
+    <img src="assets/5.png">
+    <div style="    bottom: 1px;
+    position: absolute;
+    font-size: 13px;
+    padding: 10px;
+    color: gray;
+    font-weight: 700;" class="footer-quinta">
+      <p>Nosso time entrará em contato com você em breve para assinatura dos termos!</p>
+      <p>Enquanto isso, entre no app de Lojista e dê uma olhada em tudo!</p>
+    </div>
+  </div>
  
 </ion-content>
 <ion-footer class="ion-no-border">
-  
+<ion-button (click)="entrarNoApp()" expand="block" [hidden]="quintaDiv" >
+  Entrar no app
+</ion-button>
 <ion-button expand="block" fill="outline" color="success"> 
   <ion-icon name="logo-whatsapp"></ion-icon>
   Dúvidas? Clique aqui!     

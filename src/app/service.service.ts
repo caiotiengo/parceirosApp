@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 import { Platform } from '@ionic/angular';
 //import { Foto, CheckBox } from './add-proc/add-proc.page';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 
@@ -184,7 +185,7 @@ export class ServiceService {
     proccesso;
     arrey: Array<Comentario> = [];
 
-  constructor(private afs: AngularFirestore,private http: HttpClient, public platform: Platform) {
+  constructor(private afs: AngularFirestore,public ngFireAuth: AngularFireAuth,private http: HttpClient, public platform: Platform) {
 
       // tslint:disable-next-line:indent
   	 this.userCollection = afs.collection<User>('users');
@@ -323,6 +324,15 @@ export class ServiceService {
          });
        });
    }
+   // Login in with email/password
+  SignIn(email, password) {
+    return this.ngFireAuth.signInWithEmailAndPassword(email, password)
+  }
+
+  // Register user with email/password
+  RegisterUser(email, password) {
+    return this.ngFireAuth.createUserWithEmailAndPassword(email, password)
+  }
   deleteUnidade(id:string,item:any){
    this.userCollection.doc<User>(id).update({unidades: firebase.firestore.FieldValue.arrayRemove(item)})  
   }
