@@ -23,11 +23,11 @@
     ion-grid{
         ion-icon{
             font-size: 20px;
-            border: solid 1px #ffc107;
+            border: solid 1px #6094DB;
             border-radius: 20px;
             padding: 6px;
             margin-left: -9px;
-            background: #ffc107;
+            background: #6094DB;
         }
         padding-left: 0;
         padding-right: 0;
@@ -40,12 +40,17 @@
     }
 
 }
+ion-header,ion-toolbar{
+    --background: linear-gradient(90deg,#6094DB 0%, rgb(96 148 219 / 85%) 35%, rgb(96 148 219 / 47%) 100%);
+    color:white;
+
+}
 ion-footer{
-    background: #f1f5f8;
-    border-top: solid 1px #ffc107;
+    background: #ffff;
+    border-top: solid 1px #6094DB;
 }
 .vl{
-    border-left: 5px solid #ffc107;
+    border-left: 5px solid #6094DB;
     top: 0;
     margin-left: 5px;
     height: 60%;

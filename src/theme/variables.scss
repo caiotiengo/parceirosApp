@@ -3,12 +3,12 @@
 
 
 :root {
-  --ion-color-axe: #ffc107;
-  --ion-color-axe-rgb: 255,193,7;
-  --ion-color-axe-contrast: #000000;
+  --ion-color-axe: #6094DB;
+  --ion-color-axe-rgb: 96,148,219;
+  --ion-color-axe-contrast: #ffff;
   --ion-color-axe-contrast-rgb: 0,0,0;
-  --ion-color-axe-shade: #e0aa06;
-  --ion-color-axe-tint: #ffc720;
+  --ion-color-axe-shade: #5482c1;
+  --ion-color-axe-tint: #709fdf;
 }
 
 .ion-color-axe {
@@ -19,6 +19,7 @@
   --ion-color-shade: var(--ion-color-axe-shade);
   --ion-color-tint: var(--ion-color-axe-tint);
 }
+
 
 /** Ionic CSS Variables **/
 :root {

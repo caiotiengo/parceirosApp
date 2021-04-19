@@ -22,14 +22,14 @@
 
     <div class="email-div">
       <label for="email" class="email">E-mail</label>
-      <input type="text" placeholder="Digite aqui o e-mail da sua loja..." class="emailInput">
+      <input type="text" [(ngModel)]="email" placeholder="Digite aqui o e-mail da sua loja..." class="emailInput">
     </div>
     <div class="senha-div">
       <label for="senha" class="senha">Senha</label>
-      <input type="text"  placeholder="Digite aqui a senha da sua loja..." class="senhaInput">
+      <input type="text" [(ngModel)]="senha"  placeholder="Digite aqui a senha da sua loja..." class="senhaInput">
     </div>
     <ion-button fill="clear">Esqueceu a senha?</ion-button>
-    <ion-button expand="block" color="warning">Entrar</ion-button>
+    <ion-button expand="block" (click)="login()" color="warning">Entrar</ion-button>
 
   </div>
 </ion-content>

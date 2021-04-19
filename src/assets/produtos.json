@@ -1,0 +1,643 @@
+{
+    "produtos": [
+        {
+            "Produto": "Alguidar ",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Barro",
+            "Foto 1": "https://drive.google.com/file/d/17O-qOysTz2kBdIyogIDfndbAXMkFgkO5/view?usp=sharing"
+        },
+        {
+            "Produto": "Copo de barro ",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Barro",
+            "Foto 1": "https://img.elo7.com.br/product/zoom/2E2F072/10-copos-de-barro-ceramica-artesanal-rustico-120ml-copo-de-barro.jpg"
+        },
+        {
+            "Produto": "Charuto Titan Clássico ",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1-RgwHjyr_T1rNqqMx0hJyrclHQWwXCIv/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Titan Chocolate ",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1kUcaAPAASmK-bRSJX6GBG_vnf8DJR33T/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Titan Black",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1f8OW_eXOYmQ3wrazEf0ci2AhJjLSD3tu/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Titan Conhaque",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1Td6uuwRawRNM6OTlPaMgHhozdLTIW5I5/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Talvis Natural",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1_6HtFmb0FaO-agWG25umwzx-4D7zQlXK/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Talvis Chocolate",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1CtDYmtQcIrM4kepz-AKwn-Ru51fODBnJ/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Talvis Black",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1rAWASIkANvZ-3lYQuUj4xsNRZ206KpGH/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Baianinho",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1O_3IVtH_hIdpELRs6-pAdvwpkw_5KtUI/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Baianinho Especial",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1-Cpnyw3ZHdkzmPS7NbCXRSOeuAS1WkDq/view?usp=sharing"
+        },
+        {
+            "Produto": "Charuto Caravana",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1-pkyg03opYhWplowVYjEe9a3sjIaLLHh/view?usp=sharing"
+        },
+        {
+            "Produto": "Cigarro de palha ",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://cigarros-pallhafina.webnode.pt/_files/system_preview_detail_200000000-d7569d8503/cigarro%20de%20palha.jpg"
+        },
+        {
+            "Produto": "Cigarrilha Di Julia",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://drive.google.com/file/d/1Opuz0XE4pyjTkvgD8mgNn9s-r8caHASU/view?usp=sharing"
+        },
+        {
+            "Produto": "Fumo para cachimbo ",
+            "Varia": "TRUE",
+            "Marca": "Sim",
+            "Categoria": "Tabacaria",
+            "Foto 1": "https://blogdocachimbo.files.wordpress.com/2019/09/img_7036.jpg?w=584"
+        },
+        {
+            "Produto": "Incensos diversos ",
+            "Varia": "TRUE",
+            "Marca": "Sim",
+            "Categoria": "Defumação/Incenso",
+            "Foto 1": "https://drive.google.com/file/d/1phHoHJaIl7dpHa_NwTMxow5yKeNqXp3j/view?usp=sharing"
+        },
+        {
+            "Produto": "Pembas diversas cores ",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://drive.google.com/file/d/1Wk1ADJj4CSfryh8WPjd20jaJiGWiXPQg/view?usp=sharing"
+        },
+        {
+            "Produto": "Wagi",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Outros",
+            "Foto 1": "https://drive.google.com/file/d/1JvyDNUxCbB2H5wV5wdZG70eLAqPCiiZ6/view?usp=sharing"
+        },
+        {
+            "Produto": "Cachaça caninha da roça 500ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1cpMZoXSikyk6lcA_JlELCS48s8UNHrpV/view?usp=sharing"
+        },
+        {
+            "Produto": "Cachaça caninha da roça 600ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1EL0i7RGBjA8eZv2IzwaPE3PKBf3bOH38/view?usp=sharing"
+        },
+        {
+            "Produto": "Cachaça 51 965ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1Jq-dI9ddC-iXZlVBWbp2VHVLe-XIUuVK/view?usp=sharing"
+        },
+        {
+            "Produto": "Conhaque Dreher 900ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://static.clubeextra.com.br/img/uploads/1/221/488221.jpg"
+        },
+        {
+            "Produto": "Vinho moscatel 900ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1h-9OXn6tAu4GxqbvXPUO2QzwiwKGIqpm/view?usp=sharing"
+        },
+        {
+            "Produto": "Vinho cantina da serra 880ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1dte0vd8SizCFkarEJYfPh5EEXeDLlP4j/view?usp=sharing"
+        },
+        {
+            "Produto": "Vinho cantina da serra 4,6 L",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1iticVd1hKnjBVDnM9WrA5U5doAyL31vV/view?usp=sharing"
+        },
+        {
+            "Produto": "Contini Bianco 900ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1N0BFbghSyEewnaZ6n6tcNPIEnCXydyb7/view?usp=sharing"
+        },
+        {
+            "Produto": "Cinzano Rosso 950ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/16btkcanPScdGt4nRgd7mn_lxMXLa0OhP/view?usp=sharing"
+        },
+        {
+            "Produto": "Martini Rosato 750ml",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/206/567/products/13161-e5fe9bb376fc5d399715944977348254-1024-1024.jpg"
+        },
+        {
+            "Produto": "Sidra Líder 660ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/18Q_12oGS6_YBLp9jTOCxYKv7Y8MmC0m_/view?usp=sharing"
+        },
+        {
+            "Produto": "Espumante chuva de prata 660ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1UaDiLRXD3yvIwInE9e1zZQhclT-gZyiz/view?usp=sharing"
+        },
+        {
+            "Produto": "Cachaça velho barreiro",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://drive.google.com/file/d/1dr7C__hfhfVSJNjd6KEDafKWwDtN0n6Y/view?usp=sharing"
+        },
+        {
+            "Produto": "Licor fogo paulista 960ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://www.imigrantesbebidas.com.br/bebida/images/products/full/7433_Licor_Dubar_Fogo_Paulista_960_ml.jpg"
+        },
+        {
+            "Produto": "Vinho Sangue de boi 750ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://www.drinko.com.br/wp-content/uploads/2019/10/9333521186846.jpg"
+        },
+        {
+            "Produto": "Vinho Sangue de boi 4 L",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://www.imigrantesbebidas.com.br/bebida/images/products/full/5311_Vinho_Sangue_De_Boi_Tinto_Suave_4_L.1534621932.jpg"
+        },
+        {
+            "Produto": "Licor Creme de Anis Anisette Stock 720ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://santaluzia.vteximg.com.br/arquivos/ids/969656-1000-1000/517267.jpg?v=637385341311730000"
+        },
+        {
+            "Produto": "Licor Stock  ",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "https://www.oasisbebidas.com.br/image/cache/data/produtos/licores/licor-stock-sabores-926x926.jpg"
+        },
+        {
+            "Produto": "Licor Amarula 750ml",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Bebidas",
+            "Foto 1": "http://padariamadrigal.com.br/web/image/product.template/377/image_1024?unique=e573c76"
+        },
+        {
+            "Produto": "Vela de 7 dias",
+            "Varia": "TRUE",
+            "Marca": "Sim",
+            "Categoria": "Vela",
+            "Foto 1": "https://images.tcdn.com.br/img/img_prod/641272/vela_votiva_7_dias_50mm_260g_6_1_20180618150017.jpg",
+            "Foto 2": "https://images.tcdn.com.br/img/img_prod/641272/vela_votiva_bicolor_260g_12_1_20180619234558.jpg"
+        },
+        {
+            "Produto": "Vela Palito",
+            "Varia": "TRUE",
+            "Marca": "Sim",
+            "Categoria": "Vela",
+            "Foto 1": "https://images.tcdn.com.br/img/img_prod/686522/vela_palito_por_kg_573_1_20200408121632.jpg",
+            "Foto 2": "https://img.elo7.com.br/product/zoom/2E65EB9/vela-palito-bicolor-num-5-500g-media-16-velas.jpg"
+        },
+        {
+            "Produto": "Azeite de Dendê ",
+            "Varia": "TRUE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK4jT2m-vLIxBo73mLZ3p8Ku-SMS56wJDqMy75ELo8FqK2r6EZzFGaRijtHK29LOTgEGs&usqp=CAU"
+        },
+        {
+            "Produto": "Mel ",
+            "Varia": "TRUE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://http2.mlstatic.com/D_NQ_NP_773263-MLB28024224149_082018-O.jpg"
+        },
+        {
+            "Produto": "Farinha de acarajé",
+            "Varia": "TRUE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://cdn.awsli.com.br/757/757669/produto/59040277/7b094a6fa0.jpg"
+        },
+        {
+            "Produto": "Fubá de milho",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://cozinhatecnica.com/wp-content/uploads/2019/05/fub%C3%A1.jpg"
+        },
+        {
+            "Produto": "Farinha de mandioca crua",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "http://d3ugyf2ht6aenh.cloudfront.net/stores/034/476/products/farinha-de-mandioca1-65da07c2ff40aa37b415805952517413-640-0.jpg"
+        },
+        {
+            "Produto": "Farinha de mandioca torrada",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "http://d3ugyf2ht6aenh.cloudfront.net/stores/034/476/products/farinha-de-mandioca11-65da07c2ff40aa37b415805953282283-640-0.jpg"
+        },
+        {
+            "Produto": "Farinha de mandioca grossa",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://armazemsaovito.fbitsstatic.net/img/p/farinha-de-mandioca-grossa-160835/357752.jpg?w=344&h=344&v=no-change"
+        },
+        {
+            "Produto": "Farinha de rosca",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://mercadopoa.com.br/loja/wp-content/uploads/2020/04/farinha-rosca.jpg"
+        },
+        {
+            "Produto": "Canjica",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://armazemsaovito.fbitsstatic.net/img/p/canjica-branca-160856/357955.jpg?w=344&h=344&v=no-change"
+        },
+        {
+            "Produto": "Feijão branco",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://armazemsaovito.fbitsstatic.net/img/p/feijao-branco-161105/358488.jpg?w=344&h=344&v=no-change"
+        },
+        {
+            "Produto": "Feijão fradinho",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://www.zonacerealista.com.br/media/catalog/product/cache/1/image/940x587/9df78eab33525d08d6e5fb8d27136e95/0/0/000704_h.jpg"
+        },
+        {
+            "Produto": "Feijão mulatinho",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://tempodecozimento.com.br/wp-content/uploads/2017/10/Fotolia_119399370_XS.jpg"
+        },
+        {
+            "Produto": "Feijão carioquinha",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://img.mfrural.com.br/api/image?url=https://s3.amazonaws.com/mfrural-produtos-us/219641-226468-1180052-feijao-carioquinha.jpg&width=480&height=288&mode=4"
+        },
+        {
+            "Produto": "Feijão preto",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://images.tcdn.com.br/img/img_prod/637387/feijao_preto_granel_754_1_20200626181913.jpg"
+        },
+        {
+            "Produto": "Feijão manteiga",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://www.frescosdemertola.pt/wp-content/uploads/2020/09/Feijao-Manteiga.jpg"
+        },
+        {
+            "Produto": "Milho de pipoca",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://casaspedro.vteximg.com.br/arquivos/ids/161219-1000-1000/milho-de-pipoca.jpg?v=637289119432930000"
+        },
+        {
+            "Produto": "Milho de galinha",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://casaspedro.vteximg.com.br/arquivos/ids/161219-1000-1000/milho-de-pipoca.jpg?v=637289119432930000"
+        },
+        {
+            "Produto": "Canjiquinha",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://i1.wp.com/saopauloantiga.com.br/wp-content/uploads/2016/05/quirerafina.jpg?resize=634%2C357&ssl=1"
+        },
+        {
+            "Produto": "Amendoim",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://images.tcdn.com.br/img/img_prod/752631/amendoim_cru_com_pele_sem_sal_a_vacuo_viva_salute_500g_2792_1_20200207151531.jpg"
+        },
+        {
+            "Produto": "Farinha de milho amarela flocada",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://www.ingredientesonline.com.br/media/catalog/product/cache/1/image/542x542/9df78eab33525d08d6e5fb8d27136e95/i/o/ion-60.jpg"
+        },
+        {
+            "Produto": "Farinha de milho amarela fina",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://lh3.googleusercontent.com/proxy/twGwvF2cQ57zl7GXDhQThviE74IqorKuqx0WDRgB192KQLYhp8CCGfnbh9CX20AhF9XppMtmYI2Yufz05rruRxvHsr_8UT1p1MzsgjvKhhQgqn_1tB17PE0lHrsQcA"
+        },
+        {
+            "Produto": "Farinha de milho branca fina",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://www.lojacasadesaron.com.br/image/cache/catalog/milho%20branco-800x600.jpg"
+        },
+        {
+            "Produto": "Farinha de milho branca flocada",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://cdn.awsli.com.br/600x450/440/440548/produto/28744360/bb2cbf20bd.jpg"
+        },
+        {
+            "Produto": "Grão de bico",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://cozinhatecnica.com/wp-content/uploads/2018/11/grao-de-bico-kabuli.jpg"
+        },
+        {
+            "Produto": "Ervilha",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://nutricolla.com.br/wp-content/uploads/2019/12/ervilha-grao.png"
+        },
+        {
+            "Produto": "Tapioca",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://casaspedro.vteximg.com.br/arquivos/ids/164092-1000-1000/farinha-de-tapioca-do-para-kg.jpg?v=637432010895530000"
+        },
+        {
+            "Produto": "Lentilha",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://cdn.entrypoint.directory/assets/39790/produtos/1085/produtosrelvaverde-lentilha-500g.jpg"
+        },
+        {
+            "Produto": "Semente de girassol",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://www.hajaverde.com.br/uploads/img/catalogo_produtos/144/1b836d60798c0f6c033f75f95705f61a.jpg"
+        },
+        {
+            "Produto": "Polvilho doce",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://images.tcdn.com.br/img/img_prod/637387/polvilho_doce_fecula_de_mandioca_granel_888_1_20200628101008.jpg"
+        },
+        {
+            "Produto": "Polvilho azedo",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://www.zonacerealista.com.br/media/catalog/product/cache/1/image/736x460/9df78eab33525d08d6e5fb8d27136e95/p/o/polvilho_azedo_a_granel_com_laudo_zona_cerealista.jpg"
+        },
+        {
+            "Produto": "Sagu",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Comida",
+            "Foto 1": "https://cf.shopee.com.my/file/afec7ecaf86225c1843457904d0a5653"
+        },
+        {
+            "Produto": "Coité",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://drive.google.com/file/d/1Bv2oTwgX_y9c86Sooo2IFNdPsIVsryvo/view?usp=sharing"
+        },
+        {
+            "Produto": "Quartinha de barro com alça",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Barro",
+            "Foto 1": "https://drive.google.com/file/d/19jb6YeHhkd0kkTOZs96pru4d8_gBdETq/view?usp=sharing"
+        },
+        {
+            "Produto": "Quartinha de barro sem alça ",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Barro",
+            "Foto 1": "https://drive.google.com/file/d/1ViAc3L3pzZCMraLq1KHR-xSQQEkBj6Gh/view?usp=sharing"
+        },
+        {
+            "Produto": "Quartinha de louça com alça ",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Louça",
+            "Foto 1": "https://drive.google.com/file/d/17CKak_7hgYPu9kmnPYWpza29iCDGs0Bk/view?usp=sharing"
+        },
+        {
+            "Produto": "Quartinha de louça sem alça ",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Louça",
+            "Foto 1": "https://drive.google.com/file/d/1JSH8uebfINJkfphiDI3XJcgWL770WRMH/view?usp=sharing"
+        },
+        {
+            "Produto": "Tijela de Louça ",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Louça",
+            "Foto 1": "https://a-static.mlcdn.com.br/1500x1500/tigela-dh-universal-1700-ml-de-porcelana-20-cm-schmidt/multibar/306476579/2acd34d9f7be062771489abf0c18f224.jpg"
+        },
+        {
+            "Produto": "Prato de louça",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Louça",
+            "Foto 1": "https://w1.ezcdn.com.br/rebalcomercial/fotos/grande/221fg1/prato-sobremesa-porcelana-19-cm-convencional-schmidt-sch-003.jpg"
+        },
+        {
+            "Produto": "Bacia ",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Ágata",
+            "Foto 1": "https://http2.mlstatic.com/D_NQ_NP_720436-MLB44643231995_012021-V.jpg"
+        },
+        {
+            "Produto": "Caneca",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Louça",
+            "Foto 1": "https://lojasafubra.com.br/lib/cron/fotos/lojas-afubra-caneca-porcelana-agata-sortida-70ml-lyor-8554-preco-unitario-136268.jpg"
+        },
+        {
+            "Produto": "Morim 1m ",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://drive.google.com/file/d/1NuJWq-Vy-kLFMl3Iw045rRA7RNEsSBLT/view?usp=sharing"
+        },
+        {
+            "Produto": "Esteira",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Palha",
+            "Foto 1": "https://cdn.iset.io/assets/55842/produtos/1341/13166680esteira_de_palha_para_descanso_22479_mlb20230782557_012015_o.jpg"
+        },
+        {
+            "Produto": "Esteira Nagô",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Palha",
+            "Foto 1": "https://i.pinimg.com/736x/fa/10/1f/fa101f7d82290e56054b2719fa8d88d8.jpg"
+        },
+        {
+            "Produto": "Sabão da costa",
+            "Varia": "FALSE",
+            "Marca": "Sim",
+            "Categoria": "Outros",
+            "Foto 1": "https://http2.mlstatic.com/D_NQ_NP_917082-MLB31100773746_062019-O.jpg"
+        },
+        {
+            "Produto": "Ervas Secas",
+            "Varia": "TRUE",
+            "Marca": "Sim",
+            "Categoria": "Ervas",
+            "Foto 1": "https://www.casaindaia.com.br/image/cache/data/ervas-secas/ervas-secas-570x570.JPG"
+        },
+        {
+            "Produto": "Conta leitosa de porcelana",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://drive.google.com/file/d/1PgDqU16Z92fPvUfrLlYxkvakqDdifBVF/view?usp=sharing"
+        },
+        {
+            "Produto": "Conta leitosa de resina",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://http2.mlstatic.com/D_NQ_NP_924205-MLB41245290720_032020-O.jpg"
+        },
+        {
+            "Produto": "Conta transparente de cristal",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://img.elo7.com.br/product/zoom/101ED98/fio-de-conta-cristal-transparente-8-mm-guia-de-orixas.jpg"
+        },
+        {
+            "Produto": "Conta leitosa de cristal",
+            "Varia": "TRUE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://drive.google.com/file/d/11ZFY1s1v6IdrBH8E54hZ-dmunK3BEe52/view?usp=sharing"
+        },
+        {
+            "Produto": "Efum Africano",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://www.mercadaodafe.com/fotos/extragrande/1281fe1/efum-africano.jpg"
+        },
+        {
+            "Produto": "Efum Torcido",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://images-submarino.b2w.io/produtos/01/00/img/1439993/6/1439993651_2GG.jpg"
+        },
+        {
+            "Produto": "Flora de Xangô",
+            "Varia": "FALSE",
+            "Marca": "Não",
+            "Categoria": "Outros",
+            "Foto 1": "https://floraxango.com.br/wp-content/uploads/2020/07/flora-xango-52.jpg"
+        }
+    ]
+}

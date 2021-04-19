@@ -6,18 +6,18 @@
     </ion-avatar>
     <ion-buttons slot="end">
       <ion-button class="bordered" fill="solid" color="light">
-        <ion-icon color="primary" name="notifications"></ion-icon>
+        <ion-icon color="primary" name="person"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
   <ion-item lines="none">
     <ion-avatar slot="start">
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+      <img src="{{user?.FotoPerfil}}">
     </ion-avatar>
     <ion-label>
         <p>Olá,</p>
-        <h3>Orixá da Serra</h3>
+        <h3>{{user?.nome}}</h3>
     </ion-label>
   </ion-item>
 </ion-header>
@@ -25,33 +25,16 @@
 <ion-content>
  <div class="slides ion-margin-bottom">
    <ion-slides [options]="slidesOptions">
-     <ion-slide>
-      <ion-card>
+     <ion-slide *ngFor="let itens of vendasAguardando; let i = index;">
+      <ion-card (click)="modal(itens.id)" >
         <ion-card-header>
           <div class="main">
-            <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEQlAHYHJmy3w/company-logo_200_200/0/1598197905782?e=2159024400&v=beta&t=0VgjH8MCOyIXS-4kvzE1wb6J9sPgHpGpdlVoVgE6MS0">
+            <ion-icon class="sino"  style="font-size: 30px;" color="danger" name="notifications"></ion-icon>
           </div>
         </ion-card-header>
       
         <ion-card-content class="ion-text-left">
-          <ion-card-title class="ion-margin-bottom">1 Entrega</ion-card-title>
-
-          <ion-card-subtitle class="ion-text-right">Aguardando resposta</ion-card-subtitle>
-          <ion-progress-bar type="indeterminate" value="0.5" color="primary"></ion-progress-bar>
-        </ion-card-content>
-      </ion-card>
-      
-     </ion-slide>
-     <ion-slide>
-      <ion-card>
-        <ion-card-header>
-          <div class="main">
-            <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEQlAHYHJmy3w/company-logo_200_200/0/1598197905782?e=2159024400&v=beta&t=0VgjH8MCOyIXS-4kvzE1wb6J9sPgHpGpdlVoVgE6MS0">
-          </div>
-        </ion-card-header>
-      
-        <ion-card-content class="ion-text-left">
-          <ion-card-title class="ion-margin-bottom">2 Entrega</ion-card-title>
+          <ion-card-title class="ion-margin-bottom">Pedido #{{itens?.nPedido}}</ion-card-title>
 
           <ion-card-subtitle class="ion-text-right">Aguardando resposta</ion-card-subtitle>
           <ion-progress-bar type="indeterminate" value="0.5" color="primary"></ion-progress-bar>

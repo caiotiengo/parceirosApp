@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar dados cadastrais</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text="Voltar"></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card style="background-color: white !important; ">
+    <ion-card-header > <h3 text center>Olá, {{nome}}!</h3></ion-card-header>
+    <ion-card-content>
+      <h4>Suas Informações:</h4>
+      <p>Email: {{email}}</p>
+      <p>Endereço: {{endereco}}</p>
+      <p>Bairro: {{bairro}}</p>
+      <p>Cidade: {{cidade}}</p>
+      <br/>
+      <br/>
+      <ion-label *ngIf="status === 'Online'">Loja Aberta!</ion-label>
+      <ion-label *ngIf="status === 'Offline'">Loja Fechada!</ion-label>
+      <ion-button color="success" *ngIf="status === 'Offline'" expand="block" (click)="abrirLoja()">Abrir Loja</ion-button>
+      <ion-button color="danger" *ngIf="status === 'Online'" expand="block" (click)="fecharLoja()">Fechar Loja</ion-button>
+      <ion-button  expand="block"  color="success" (click)="habilitar()"> Habilitar Notificações</ion-button>
+      <ion-button  expand="block"   color="axe" (click)="vaiProdutos()">Seus produtos</ion-button>
+      <ion-button  expand="block"  color="dark" (click)="sair()">Sair do App</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+  <ion-card style="background-color: white !important; ">
+    <h2>Filiais</h2>
+    <ion-list>
+      <ion-item *ngFor="let itens of unidadez">
+        {{itens.endereco}},{{itens.estado}}
+          <ion-button slot="end" (click)="pedirDele(itens)">Deletar</ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-button  expand="block" color="axe" (click)="addUni()" >Adicionar Filial</ion-button>
+
+  </ion-card>
+  <ion-card style="background-color: white !important; ">
+    <ion-card-content>  
+     <h4 style="color: green"> <ion-icon name="cash"></ion-icon> - {{banco}}</h4>
+     <p><i>Agência:{{agencia}} - Conta:{{conta}}</i></p>
+     <p><i>Corrente ou Poupança? {{tipoConta}}</i></p>
+     <p><i>CNPJ Conta: {{CPFconta}}</i></p>
+      <ion-button expand="block" (click)="updateBank()" color="warning">  
+        alterar
+      </ion-button>
+  <form [formGroup]="newBanco" [hidden]="hideMe2">
+   <br/>
+
+    <h4 style="text-align: center;">Qual a nova conta bancária?</h4>
+    <br/>
+    <p style="text-align: center;"> Conta Corrente ou Poupança? </p>
+        <ion-select style="color:black;" placeholder="Clique aqui" required  formControlName="tipoContaNew">
+            <ion-select-option value="Corrente">Corrente</ion-select-option>
+            <ion-select-option value="Poupanca">Poupança</ion-select-option>
+        </ion-select>
+        <ion-item>
+          <ion-label position="floating">Banco</ion-label>
+          <ion-input formControlName="bancoNew" value={{nomeBanco}} (ionInput)="buscaBanco($event)" type="text"></ion-input>
+        </ion-item>
+
+
+
+              <!--  -->
+
+              <ion-list [hidden]="hider">
+                <ion-item *ngFor="let item of bancos" tappable (click)="updateBusca(item)">
+                  <p>{{ item.value }} - {{item.label}}</p>
+                </ion-item>
+              </ion-list>
+
+              <!-- -->
+              <ion-item>
+                <ion-label position="floating">Número do Banco</ion-label>
+                <ion-input disabled formControlName="numeroBank" value={{numeroBank}} type="text"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Agência</ion-label>
+                <ion-input formControlName="agenciaNew" required></ion-input>
+              </ion-item>
+              <ion-grid>
+                <ion-row>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label position="floating">Conta</ion-label>
+                          <ion-input formControlName="contaNew" required></ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label position="floating">Digito</ion-label>
+                        <ion-input  type="tel" pattern="[0-9]*" maxlength="1" formControlName="digitoNew" required></ion-input>
+                      </ion-item>
+                    </ion-col>
+                </ion-row>
+              </ion-grid>
+            
+
+            <ion-item>
+              <ion-label position="floating">Nome na Conta</ion-label>
+              <ion-input formControlName="nomeContaNew" required type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">CNPJ da Conta</ion-label>
+              <ion-input formControlName="CPFcontaNew" [brmasker]="{person: true}"  required type="text"></ion-input>
+            </ion-item>           
+
+
+           
+      <ion-button expand="block" (click)="updateBanco()" color="success" slot="end">Atualizar</ion-button><br/>
+
+
+  </form>
+</ion-card-content>
+
+</ion-card>
+<ion-card style="background-color: white !important; ">
+  <ion-card-content>  
+   <p><i>Horário de Entrega:{{entrega}}</i></p>
+   <p><i>Se ultrapassar esse horário: {{seNao}}</i></p>
+    <ion-button expand="block" (click)="updateEntrega()" color="warning">  
+      alterar
+    </ion-button>
+<form [formGroup]="newEntrega" [hidden]="hideMe3">
+ <br/>
+
+  <h4 style="text-align: center;">Quais são os seus horários?</h4>
+  <br/>
+
+          <ion-grid>
+              <ion-row>
+                  <ion-col>
+                      <ion-item>
+                    <ion-label position="floating">Horário de entrega</ion-label>
+                    <ion-input formControlName="entregas" required></ion-input>
+                </ion-item>
+
+                  </ion-col>
+                  <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Se ultrapassar esse horário</ion-label>
+                    <ion-input formControlName="senaoEntregas" required></ion-input>
+                </ion-item>
+                  </ion-col>
+              </ion-row>
+            </ion-grid>
+          
+         
+    <ion-button expand="block" (click)="entregaz()" color="success" slot="end">Atualizar</ion-button><br/>
+
+
+</form>
+</ion-card-content>
+</ion-card>
+</ion-content>

@@ -2,29 +2,30 @@
   <ion-toolbar>
     <ion-title>Entregas</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button color="light" text="Voltar"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <p style="text-align:center;">Normalmente, os pedidos de entregador podem levar algum tempo, arrume tudo antes de pedir!</p>
   <div class="main">
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col>
-          <ion-select placeholder="Tipo de veiculo">
-            <ion-select-option>Moto</ion-select-option>
-            <ion-select-option>Carro</ion-select-option>
-            <ion-select-option>Van/Fiorino</ion-select-option>
+          <ion-select [(ngModel)]="tipoCarro" placeholder="Tipo de veiculo">
+            <ion-select-option value="8">Moto</ion-select-option>
+            <ion-select-option  value="7">Carro</ion-select-option>
+            <ion-select-option  value="5">Van/Fiorino</ion-select-option>
           </ion-select>
         </ion-col>
         <ion-col>
-          <ion-select placeholder="Peso">
-            <ion-select-option>Até 1kg</ion-select-option>
-            <ion-select-option>Até 5kg</ion-select-option>
-            <ion-select-option>Até 10kg</ion-select-option>
-            <ion-select-option>Até 15g</ion-select-option>
-            <ion-select-option>Até 20kg</ion-select-option>
+          <ion-select [(ngModel)]="pesoEntrega" placeholder="Peso">
+            <ion-select-option  value="1">Até 1kg</ion-select-option>
+            <ion-select-option  value="5">Até 5kg</ion-select-option>
+            <ion-select-option  value="10">Até 10kg</ion-select-option>
+            <ion-select-option  value="15">Até 15kg</ion-select-option>
+            <ion-select-option  value="20">Até 20kg</ion-select-option>
           </ion-select>
         </ion-col>
       </ion-row>
@@ -32,19 +33,19 @@
     <ion-grid>
       <ion-row>
         <ion-col style="margin-top: 10px;" size="1">
-          <ion-icon name="bicycle"></ion-icon>
+          <ion-icon style="color: white;" name="bicycle"></ion-icon>
 
           <div class="vl">
 
           </div>
-          <ion-icon style="margin-top: 3px;" name="cube-outline"></ion-icon>
+          <ion-icon style="margin-top: 3px; color: white;" name="cube-outline"></ion-icon>
 
         </ion-col>
         <ion-col size="11">
           <div class="endrecoEntrega">
             <label for="enderecoEnt">Endereço completo da entrega</label>
             <input placeholder="Digite aqui o endereço para entrega..." id="enderecoEnt" [(ngModel)]="endereco" />
-            <label *ngIf="endereco ===''" class="required">* Endereço obrigatório</label>
+            <label *ngIf="endereco === undefined" class="required">* Endereço obrigatório</label>
 
           </div>
           <ion-grid>
@@ -53,14 +54,14 @@
                 <div class="endrecoEntrega">
                   <label for="enderecoEnt">Complemento</label>
                   <input placeholder="Digite aqui o complemento " id="enderecoEnt" [(ngModel)]="complemento" />
-                  <label *ngIf="complemento ===''" class="required">* Complemento obrigatório</label>
+                  <label *ngIf="complemento === undefined" class="required">* Complemento obrigatório</label>
                 </div>
               </ion-col>
               <ion-col>
                 <div class="endrecoEntrega">
                   <label for="enderecoEnt">Bairro</label>
                   <input placeholder="Digite aqui o bairro" id="enderecoEnt" [(ngModel)]="bairro" />
-                  <label *ngIf="bairro ===''" class="required">* Bairro obrigatório</label>
+                  <label *ngIf="bairro === undefined" class="required">* Bairro obrigatório</label>
                 </div>
               </ion-col>              
             </ion-row>
@@ -69,19 +70,19 @@
             <ion-row class="ion-align-items-center">
               <ion-col>
                 <ion-select [(ngModel)]="cidade" placeholder="Cidade">
-                  <ion-select-option value="Rio de Janeiro">Rio de Janeiro</ion-select-option>
-                  <ion-select-option value="São Paulo">São Paulo</ion-select-option>
+                  <ion-select-option selected value="Rio de Janeiro">Rio de Janeiro</ion-select-option>
+                  <!--ion-select-option value="São Paulo">São Paulo</ion-select-option>
                   <ion-select-option value="Campinas">Campinas</ion-select-option>
-                  <ion-select-option value="Belo Horizonte">Belo Horizonte</ion-select-option>
+                  <ion-select-option value="Belo Horizonte">Belo Horizonte</ion-select-option-->
 
                 </ion-select>
+                <label *ngIf="cidade === undefined" class="required">* Cidade obrigatório</label>
+
               </ion-col>
               <ion-col>
                 <label disabled *ngIf="cidade ==='Rio de Janeiro'" [(ngModel)]="estado" value='RJ'>RJ</label>
-                <label disabled *ngIf="cidade ==='São Paulo'" [(ngModel)]="estado" value="SP">SP</label>
-                <label disabled *ngIf="cidade ==='Campinas'" [(ngModel)]="estado" value="SP">SP </label>
-                <label disabled *ngIf="cidade ==='Belo Horizonte'" [(ngModel)]="estado" value="MG">MG</label>
-
+            
+                  
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -93,11 +94,11 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button *ngIf="pontos.lenght > 1" fill="clear" (click)="addDestinoAlt()" color="dark" style="font-size: 12px;">        
+    <ion-button *ngIf="pontos.length > 1" fill="clear" (click)="addDestinoAlt()" color="dark" style="font-size: 12px;">        
       <ion-icon name="add-circle-outline" style="margin-right: 5px;"></ion-icon>
         Adicionar outro destino 
     </ion-button>
-    <ion-button color="axe" (click)="calDesti()"  expand="block">Calcular</ion-button>
+    <ion-button color="axe" style="color: white;" (click)="calDesti()"  expand="block">Calcular</ion-button>
 
   </div>
   <ion-list>
@@ -106,7 +107,7 @@
         <ion-label class="loja-label" *ngIf="i === 0" slot="end">Loja</ion-label>
       </p>
       <p slot="start" *ngIf="i != 0" style="font-size: 14px;">{{itens.address}}
-        <ion-label class="del-label" *ngIf="i != 0" slot="end">Deletar</ion-label>
+        <ion-label (click)="removerLista(i)" class="del-label" *ngIf="i != 0" slot="end">Deletar</ion-label>
       </p>  
       
     </ion-item>
@@ -117,11 +118,11 @@
     <ion-row class="ion-align-items-center">
       <ion-col>
        <ion-item>
-         <h4>R$1000</h4>
+         <h4>R${{precoCalculado}}</h4>
        </ion-item>
       </ion-col>
       <ion-col>
-          <ion-button color="axe" expand="block">Pedir entregador</ion-button>
+          <ion-button color="axe" *ngIf="precoCalculado != '0.00'" style="color: white;" (click)="post()" expand="block">Pedir entregador</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: '',
+    path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./add-proc/add-proc.module').then( m => m.AddProcPageModule)
   },
   {
-    path: 'edit-proc',
+    path: 'edit-proc/:id',
     loadChildren: () => import('./edit-proc/edit-proc.module').then( m => m.EditProcPageModule)
   },
   {
@@ -51,12 +51,36 @@ const routes: Routes = [
     loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
   },
   {
-    path: 'intro',
+    path: '',
     loadChildren: () => import('./intro/intro.module').then( m => m.IntroPageModule)
   },
   {
     path: 'politica',
     loadChildren: () => import('./politica/politica.module').then( m => m.PoliticaPageModule)
+  },
+  {
+    path: 'perfil-loja',
+    loadChildren: () => import('./perfil-loja/perfil-loja.module').then( m => m.PerfilLojaPageModule)
+  },
+  {
+    path: 'modal-passos',
+    loadChildren: () => import('./modal-passos/modal-passos.module').then( m => m.ModalPassosPageModule)
+  },
+  {
+    path: 'root',
+    loadChildren: () => import('./root/root.module').then( m => m.RootPageModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
+  },
+  {
+    path: 'add-filial',
+    loadChildren: () => import('./add-filial/add-filial.module').then( m => m.AddFilialPageModule)
+  },
+  {
+    path: 'item',
+    loadChildren: () => import('./item/item.module').then( m => m.ItemPageModule)
   }
 ];
 @NgModule({

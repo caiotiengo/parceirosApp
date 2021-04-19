@@ -5,6 +5,7 @@ import { NavController, ModalController, LoadingController } from '@ionic/angula
 import { PoliticaPage } from '../politica/politica.page';
 import { AngularFireAuth } from '@angular/fire/auth';
 declare var google;
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-register',
@@ -71,7 +72,7 @@ export class RegisterPage implements OnInit {
   userUID;
   idMoip;
   tokenMoip;
-  constructor(public services: ServiceService, public loadingController: LoadingController, public afAuth: AngularFireAuth,public zone: NgZone, private modalController: ModalController, public navCtrl:NavController) {
+  constructor(public services: ServiceService,public storage: Storage , public loadingController: LoadingController, public afAuth: AngularFireAuth,public zone: NgZone, private modalController: ModalController, public navCtrl:NavController) {
 
     this.moip = moipSdk({
       /*

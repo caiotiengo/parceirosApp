@@ -1,0 +1,123 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-avatar slot="start">
+      <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEQlAHYHJmy3w/company-logo_200_200/0/1598197905782?e=2159024400&v=beta&t=0VgjH8MCOyIXS-4kvzE1wb6J9sPgHpGpdlVoVgE6MS0">
+
+    </ion-avatar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    </ion-toolbar>
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+    </ion-avatar>
+    <ion-label>
+        <p>Loja,</p>
+        <h3>Orixá da Serra</h3>
+    </ion-label>
+    <ion-label slot="end">
+      <p>Horário</p>
+      <h3>08:00 - 18:00</h3>
+      <p>Taxa de entrega</p>
+      <h3>R$</h3>
+  </ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <div class="menu-loja">
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button>
+        <ion-label>Produtos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button>
+        <ion-label>Sobre a loja</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div class="container">
+    <ion-item style="border-radius: 10px;" (click)="entregasPage()" lines="none">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3">
+            <ion-button color="dark" fill="clear" style="background: #ffc107;
+            border-radius: 5px;
+            height: 40px;">
+              <ion-icon slot="icon-only" name="document-text-outline"></ion-icon>
+            </ion-button> 
+    
+          </ion-col>
+          <ion-col size="7">
+            <ion-label>
+              <h4>
+                Lista de pedidos
+              </h4>
+              <h6>
+               Peça direto com a loja!
+              </h6>
+            </ion-label>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button color="dark" fill="clear">
+              <ion-icon slot="icon-only"  name="chevron-forward-outline"></ion-icon>
+            </ion-button> 
+          </ion-col>
+        </ion-row>
+        
+      </ion-grid>
+    </ion-item>
+
+    <div class="filtros">
+      <ion-grid>
+        <ion-row>
+          <ion-col [hidden]="hide" size="2">
+            <ion-button (click)="filtroCat()"color="axe">            
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col [hidden]="hide" size="10">
+            <ion-searchbar placeholder="Pesquise o produto..." animated></ion-searchbar>
+          </ion-col>
+
+          <ion-col [hidden]="hide2" size="10">
+            <ion-select placeholder="Filtrar por categoria">
+              <ion-select-option selected>
+              </ion-select-option>
+            </ion-select>     
+          </ion-col>
+
+          <ion-col [hidden]="hide2" size="2">
+            <ion-button color="axe" (click)="searchBar()">            
+              <ion-icon name="search-outline"></ion-icon>
+            </ion-button>
+            </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+ 
+    </div>
+
+    <ion-list>
+      <ion-item lines="none">
+
+        <ion-avatar slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        <ion-label>
+          <h4>
+            Produto 1
+          </h4>
+          <h6>
+           R$
+          </h6>
+        </ion-label>
+        <ion-button color="axe" slot="end">veja</ion-button>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+
+</ion-content>

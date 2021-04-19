@@ -24,6 +24,7 @@ import { HaversineService } from "ng2-haversine";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ServiceService } from './service.service';
 import { Push } from '@ionic-native/push/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -38,7 +39,12 @@ import { Push } from '@ionic-native/push/ngx';
     HttpClientModule,
     BrMaskerModule,
     IonicModule.forRoot(), 
-    AppRoutingModule,    
+    AppRoutingModule,  
+    IonicStorageModule.forRoot({
+      name: '_myDb',
+      driverOrder: ['sqlite', 'indexeddb', 'websql', 'localstorage']
+    
+      })
   ],
   providers: [
     StatusBar,
@@ -54,6 +60,7 @@ import { Push } from '@ionic-native/push/ngx';
     MediaCapture,
     File,
     HTTP,
+    Storage,
     Media,
     BrMaskDirective,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

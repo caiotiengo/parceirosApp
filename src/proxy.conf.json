@@ -1,0 +1,10 @@
+{
+  "name": "clickentregas",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/entregas",
+      "proxyUrl": "https://robotapitest.clickentregas.com/api/business/1.1"
+    }
+  ]
+}

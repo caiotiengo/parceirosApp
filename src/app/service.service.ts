@@ -284,6 +284,9 @@ export class ServiceService {
       return { id, ...data };
     })))
   }
+  getLoja(id:string){
+    return this.userCollection.doc<User>(id).valueChanges()
+  }
   getTodosProdutos(){
     let produtos = this.afs.collection<any>('produto');
     return produtos.snapshotChanges().pipe(
@@ -324,6 +327,26 @@ export class ServiceService {
          });
        });
    }
+   data4(){
+    return new Promise(resolve => {
+      this.http.get<any[]>('/assets/produtos.json').subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+   }
+   data5(){
+    return new Promise(resolve => {
+      this.http.get<any[]>('/assets/produtos.json').subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+   }
    // Login in with email/password
   SignIn(email, password) {
     return this.ngFireAuth.signInWithEmailAndPassword(email, password)
@@ -333,6 +356,7 @@ export class ServiceService {
   RegisterUser(email, password) {
     return this.ngFireAuth.createUserWithEmailAndPassword(email, password)
   }
+
   deleteUnidade(id:string,item:any){
    this.userCollection.doc<User>(id).update({unidades: firebase.firestore.FieldValue.arrayRemove(item)})  
   }
