@@ -4,6 +4,7 @@ import { ModalPassosPage } from '../modal-passos/modal-passos.page';
 import { Storage } from '@ionic/storage';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
+import { ItemPage } from '../item/item.page';
 
 @Component({
   selector: 'app-home',
@@ -42,9 +43,13 @@ export class HomePage implements OnInit {
     })
   }
 
-  async presentModal() {
+
+  async modalItem(itens) {
     const modal = await this.modal.create({
-      component: ModalPassosPage,
+      componentProps:{
+        'venda': itens
+      },
+      component: ItemPage,
       cssClass: 'my-custom-class'
     });
     return await modal.present();
@@ -53,7 +58,7 @@ export class HomePage implements OnInit {
   entregasPage(){
     //let user = this.user
    // console.log(user)
-    this.router.navigate(['/entregas'])
+    this.router.navigate(['/entrega'])
   }
   ganhosPage(){
     this.navCtrl.navigateForward('/ganhos')
@@ -63,5 +68,11 @@ export class HomePage implements OnInit {
   }
   editarPage(){
     this.navCtrl.navigateForward('/user')
+  }
+  chatPage(){
+    this.navCtrl.navigateForward('/lista-chat')
+  }
+  pedidosPage(){
+    this.navCtrl.navigateForward('/lista-pedidos')
   }
 }

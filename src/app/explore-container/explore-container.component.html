@@ -1,4 +1,23 @@
-<div id="container">
-  <strong>{{ name }}</strong>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{data?.order_id}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()"  color="light">
+        <ion-icon color="dark" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="main" style="text-align: center;">
+    <h4 *ngIf="courier === null">Procurando motorista...</h4>
+    <h4 *ngIf="courier != null">Entregador:{{courier?.name}} {{courier?.middlename}}</h4>
+
+    <h6>{{data?.created_datetime | date: 'short'}}</h6>
+    <p *ngIf="courier != null">Telefone do entregador:{{courier?.phone}}</p>
+  </div>
+  
+
+</ion-content>

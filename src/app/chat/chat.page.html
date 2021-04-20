@@ -1,9 +1,54 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>chat</ion-title>
+    <ion-title>{{chatou?.nomeComprador}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()"  color="light">
+        <ion-icon color="dark" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
 
-</ion-content>
+  <p *ngIf="semChat != 0" style="text-align: center; font-weight: bold;"> Para a sua segurança, as conversas através do chat do Axé Delivery são monitoradas.</p>
+
+<div class="chat">
+<ion-grid *ngIf="semChat === 0" >
+  <div>
+    <p style="text-align: center;"> Para a sua segurança, as conversas através do chat do Axé Delivery são monitoradas.</p>
+    <p style="text-align: center;"> O compartilhamento de números ou qualquer outro dado para contato está sujeito a punições.</p> 
+    
+  </div>
+</ion-grid>
+
+    <ion-row *ngFor="let msgs of chatou?.mensagens">
+      <ion-col size="9"  *ngIf="userID != msgs.uid" class="message other-message">
+        <b>{{msgs.conteudo}}</b><br>
+        <div class="time" text-right><br>{{msgs.criadoEm | date: 'short'}}</div>
+      </ion-col>
+      <ion-col offset="3" size="9"  *ngIf="userID === msgs.uid" class="message my-message">
+        <b>{{msgs.conteudo}}</b><br>  
+        <div class="time" text-right><br>{{msgs.criadoEm | date: 'short'}}</div>
+      </ion-col>
+    </ion-row>
+
+</div>
+
+</ion-content >
+
+
+ <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button style="--background:#ffcb02; " (click)="enviar()">
+		<ion-icon name="send" style="color: black;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+<ion-footer class="ion-no-border">
+
+<ion-item style="width: 80%">
+  <ion-input placeholder="Digite aqui a sua mensagem"[(ngModel)]="novaMsg"></ion-input>
+
+</ion-item>
+
+</ion-footer>
+

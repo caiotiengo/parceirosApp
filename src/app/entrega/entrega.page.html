@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>entrega</ion-title>
+    <ion-title>Entregas</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text="Voltar"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
+  <div class="main">
+    <h6></h6>
+    <h4></h4>
+    <ion-button color="axe" expand="block" (click)="goPedido()">Pedir um entregador</ion-button>
+  </div>
+  <ion-list>
+    <ion-item lines="none" button *ngFor="let itens of entregasList; let i = index;" (click)="presentModal(itens.orders[i])">
+      <ion-avatar slot="start">
+        <ion-icon name="bicycle-outline" style="width: 100%;
+        height: 100%;"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h4>{{itens.orders[0].points[1].contact_person.name}}</h4>
+        <h6 *ngIf="itens.orders[0].status === 'new'">Aguardando aprovação...</h6>
+        <h6 *ngIf="itens.orders[0].status === 'available'">Procurando motorista...</h6>
+        <h6 *ngIf="itens.orders[0].status === 'active'">Motorista em rota!</h6>
+        <h6 *ngIf="itens.orders[0].status === 'completed'">Concluído!</h6>
+        <h6 *ngIf="itens.orders[0].status === 'reactivated'">Procurando novos motoristas...</h6>
+        <h6 *ngIf="itens.orders[0].status === 'draft'">Rascunho</h6>
+        <h6 *ngIf="itens.orders[0].status === 'canceled'">Cancelada!</h6>
+        <h6 *ngIf="itens.orders[0].status === 'delayed'">Aguardando verificação...</h6>
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 
 </ion-content>

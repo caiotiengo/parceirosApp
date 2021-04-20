@@ -101,18 +101,18 @@ export class EntregasPage implements OnInit {
 
      return this.httpClient.post(`https://axedelivery.herokuapp.com/${url}`,body,this.httpOptions)
    }
- async post(){
-    const loading = await this.loadingController.create({
-      //cssClass: 'my-custom-class',
-      message: 'Pedindo o entregador...'
-    })
-    await loading.present();
+    async post(){
+      const loading = await this.loadingController.create({
+        //cssClass: 'my-custom-class',
+        message: 'Pedindo o entregador...'
+      })
+      await loading.present();
 
-    this.postRequest('https://robotapitest.clickentregas.com/api/business/1.1/create-order', this.pontos).subscribe(async (returnedStuff) => {
-      console.log(returnedStuff);
-      await loading.dismiss();
+      this.postRequest('https://robotapitest.clickentregas.com/api/business/1.1/create-order', this.pontos).subscribe(async (returnedStuff) => {
+        console.log(returnedStuff);
+        await loading.dismiss();
 
-    });
+      });
    }
    calculateRequest(url, json){
      console.log(json)

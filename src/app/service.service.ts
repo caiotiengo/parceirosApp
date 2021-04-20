@@ -144,6 +144,7 @@ export interface Chat{
   criadoEm?: Date;
   id?: string;
   uid?: string;
+  idLoja?:string;
 }
 export interface Orcamento{
   orcamento?:any;
@@ -275,11 +276,21 @@ export class ServiceService {
             }))
         );
   }
+  
   getLojas(){
     let lojasMapeadas = this.afs.collection('users',ref => ref.where('tipo' , '==' , 'Loja') && ref.where('aprovado' , '==' , 'Sim') );
      return lojasMapeadas.snapshotChanges().pipe(
       map(actions => actions.map(a => {
       const data = a.payload.doc.data() as User;
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    })))
+  }
+  getEntregas(){
+    let entregasMapeadas = this.afs.collection('clickEntregas');
+     return entregasMapeadas.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as any;
       const id = a.payload.doc.id;
       return { id, ...data };
     })))

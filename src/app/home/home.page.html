@@ -26,7 +26,7 @@
  <div class="slides ion-margin-bottom">
    <ion-slides [options]="slidesOptions">
      <ion-slide *ngFor="let itens of vendasAguardando; let i = index;">
-      <ion-card (click)="modal(itens.id)" >
+      <ion-card (click)="modalItem(itens)" >
         <ion-card-header>
           <div class="main">
             <ion-icon class="sino"  style="font-size: 30px;" color="danger" name="notifications"></ion-icon>
@@ -75,6 +75,34 @@
       
     </ion-grid>
   </ion-item>
+  <ion-item (click)="chatPage()" lines="none">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only" name="chatbubbles-outline"></ion-icon>
+          </ion-button> 
+  
+        </ion-col>
+        <ion-col size="7">
+          <ion-label>
+            <h4>
+              Chat
+            </h4>
+            <h6>
+             Veja todos os Chats!
+            </h6>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only"  name="chevron-forward-outline"></ion-icon>
+          </ion-button> 
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+  </ion-item>
   <ion-item (click)="ganhosPage()" lines="none">
     <ion-grid>
       <ion-row class="ion-align-items-center">
@@ -91,6 +119,34 @@
             </h4>
             <h6>
               Veja a sua conta!
+            </h6>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only"  name="chevron-forward-outline"></ion-icon>
+          </ion-button> 
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+  </ion-item>
+  <ion-item (click)="pedidosPage()" lines="none">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+          </ion-button> 
+  
+        </ion-col>
+        <ion-col size="7">
+          <ion-label>
+            <h4>
+              Pedidos
+            </h4>
+            <h6>
+             Veja todos os seus pedidos!
             </h6>
           </ion-label>
         </ion-col>
