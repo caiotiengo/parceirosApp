@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Orçamento {{orcamento?.nomeComprador}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()"  color="light">
+        <ion-icon color="dark" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <h2 style="text-align: center;">Produtos</h2>
+      <ion-list *ngFor="let items of produtos?.orcamento">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                {{items.nome}}
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-button *ngIf="items.quantity !== 0 && items.quantity !== 1" color="warning" style="margin-right: 5%;" (click)="retirar(i)">
+                  <ion-icon name="remove-outline"></ion-icon>
+                </ion-button>
+                
+                  {{items.quantity}}
+                
+                <ion-button style="margin-left: 5%;" color="warning" (click)="adicionar(i)">
+                  <ion-icon name="add-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
+            </ion-col>            
+          </ion-row>
+        </ion-grid>
+
+      </ion-list>
+  </div>
+  <br/>
+  <br/>
+  <p style="text-align: center;">Envie agora o valor da sua proposta! Ela ficará disponível para o cliente comprar logo em seguida!</p>
+  <ion-item>
+    <ion-label position="floating">Valor</ion-label>
+    <ion-input name="valor" [(ngModel)]="valor"
+    [brmasker]="{money: true}" type="text"></ion-input>
+  </ion-item>
+<ion-button color="warning" expand="block" (click)="enviarPro()">Enviar Valores</ion-button>
+</ion-content>

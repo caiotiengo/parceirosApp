@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pedidos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text="Voltar"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="block" color="axe" (click)="listaOrc()">Orçamentos</ion-button>
+  <ion-list>
+    <ion-item lines="none" button *ngFor="let itens of vendas; let i = index;" (click)="modalItem(itens)">
+      <ion-avatar slot="start">
+        <ion-icon name="cart-outline" color="axe" style="width: 100%;
+        height: 100%;"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+         <h4 style="font-size: 700;"> {{itens.nomeComprador}}</h4>
+         <h6 style="color: grey;" >#{{itens.nPedido}} </h6>
+         <h6 style="color: grey;" >{{itens.statusEnt}} </h6>
+         <h6 style="color: cornflowerblue;" >Pagamento: {{itens.statusPag}} </h6>
+
+         <!--h6 style="color: grey;" *ngIf="itens.mensagens.length === 0"> Clique para enviar uma mensagem!</h6-->
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
