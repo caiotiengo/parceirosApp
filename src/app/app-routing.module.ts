@@ -93,6 +93,10 @@ const routes: Routes = [
   {
     path: 'orcamento',
     loadChildren: () => import('./orcamento/orcamento.module').then( m => m.OrcamentoPageModule)
+  },
+  {
+    path: 'modal-orcamento',
+    loadChildren: () => import('./modal-orcamento/modal-orcamento.module').then( m => m.ModalOrcamentoPageModule)
   }
 ];
 @NgModule({

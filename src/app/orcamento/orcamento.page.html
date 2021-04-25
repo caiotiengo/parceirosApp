@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Orçamento {{orcamento?.nomeComprador}}</ion-title>
     <ion-buttons slot="end">
@@ -10,41 +10,70 @@
 </ion-header>
 
 <ion-content>
-  <div>
+  <div class="container">
     <h2 style="text-align: center;">Produtos</h2>
-      <ion-list *ngFor="let items of produtos?.orcamento">
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                {{items.nome}}
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-button *ngIf="items.quantity !== 0 && items.quantity !== 1" color="warning" style="margin-right: 5%;" (click)="retirar(i)">
-                  <ion-icon name="remove-outline"></ion-icon>
-                </ion-button>
-                
-                  {{items.quantity}}
-                
-                <ion-button style="margin-left: 5%;" color="warning" (click)="adicionar(i)">
-                  <ion-icon name="add-outline"></ion-icon>
-                </ion-button>
-              </ion-item>
-            </ion-col>            
-          </ion-row>
-        </ion-grid>
-
+      <ion-list *ngFor="let items of produtos; let i = index;">
+        <ion-item lines="none" (click)="modalAnswer(items, i)">
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="3">
+                <ion-button *ngIf="items.foto === undefined" color="dark" fill="clear">
+                  <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
+                </ion-button> 
+                <ion-avatar *ngIf="items.foto !== undefined" >
+                  <img src="{{items.foto}}"/>
+                </ion-avatar>
+              </ion-col>
+              <ion-col size="7">
+                <ion-label>
+                  <h4>
+                    {{items.quantity}} {{items.nome}}
+                  </h4>
+                  <h6>
+                   Obs: {{items.obs}}
+                  </h6>
+                  <p style="width: 65%;
+                  background: #8bc34a;
+                  height: 20px;
+                  text-align: center;
+                  color: white;
+                  border-radius: 5px;" *ngIf="items.disponivel !== undefined && items.disponivel === true">
+                   Avaliado
+                  </p>
+                  <p style="width: 75%;
+                  height: 20px;
+                  background: #f44336;
+                  text-align: center;
+                  color: white;
+                  border-radius: 5px;" *ngIf="items.disponivel !== undefined && items.disponivel === 'Não avaliado'">
+                    Sem avaliação
+                   </p>
+                </ion-label>
+              </ion-col>
+              <ion-col size="2">
+                <ion-button color="dark" fill="clear">
+                  <ion-icon slot="icon-only"  name="chevron-forward-outline"></ion-icon>
+                </ion-button> 
+              </ion-col>
+            </ion-row>
+            
+          </ion-grid>
+        </ion-item>
       </ion-list>
   </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h4 style="margin: 10px;">R${{valorTotal}}</h4>
+      </ion-col>
+      <ion-col>
+        <ion-button color="warning" expand="block" (click)="enviarPro()">Enviar orçamento</ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <br/>
   <br/>
   <p style="text-align: center;">Envie agora o valor da sua proposta! Ela ficará disponível para o cliente comprar logo em seguida!</p>
-  <ion-item>
-    <ion-label position="floating">Valor</ion-label>
-    <ion-input name="valor" [(ngModel)]="valor"
-    [brmasker]="{money: true}" type="text"></ion-input>
-  </ion-item>
-<ion-button color="warning" expand="block" (click)="enviarPro()">Enviar Valores</ion-button>
+
 </ion-content>

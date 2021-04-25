@@ -8,6 +8,7 @@ import { Platform } from '@ionic/angular';
 //import { Foto, CheckBox } from './add-proc/add-proc.page';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 
@@ -186,7 +187,8 @@ export class ServiceService {
     proccesso;
     arrey: Array<Comentario> = [];
 
-  constructor(private afs: AngularFirestore,public ngFireAuth: AngularFireAuth,private http: HttpClient, public platform: Platform) {
+  constructor(private afs: AngularFirestore,public ngFireAuth: AngularFireAuth,
+    private http: HttpClient, public angularFireStorage: AngularFireStorage,  public platform: Platform) {
 
       // tslint:disable-next-line:indent
   	 this.userCollection = afs.collection<User>('users');
@@ -295,6 +297,28 @@ export class ServiceService {
       return { id, ...data };
     })))
   }
+  imageName() {
+    const newTime = Math.floor(Date.now() / 1000);
+    return Math.floor(Math.random() * 20) + newTime;
+  }
+
+    async storeImage(imageData: any) {
+      try {
+          const imageName = this.imageName();
+          return new Promise((resolve, reject) => {
+          const pictureRef = this.angularFireStorage.ref(imageName + '.jpg');
+          pictureRef.put(imageData).then(function () {
+              pictureRef.getDownloadURL().subscribe((url: any) => {
+                resolve(url);
+                });
+            }).catch((error) => {
+              reject(error);
+          });
+        });
+        } catch (e) {
+
+        }
+    }
   getLoja(id:string){
     return this.userCollection.doc<User>(id).valueChanges()
   }
@@ -476,8 +500,17 @@ updateEnd(id: string, tipo:string, end: string, cep:string, bairro:string,comple
   updateOrcamento(id:string, idChat:any){
     this.orcamentoCollection.doc<Orcamento>(id).update({chat:idChat})
   }
-  updateOrcamentoVal(id:string, price:number, valor:string){
-    this.orcamentoCollection.doc<Orcamento>(id).update({price:price, valor:valor})
+  deleteOrcamento(id:string,item:any){
+    this.orcamentoCollection.doc<Orcamento>(id).update({orcamento: firebase.firestore.FieldValue.arrayRemove(item)})  
+   }
+  updateOrcamentoVal(id:string, price:number, valor:string, produtos:any){
+    //const data = produtos;
+  //  console.log(data)
+    this.orcamentoCollection.doc<Orcamento>(id).update({
+      price:price, 
+      valor:valor,
+      orcamento:produtos
+    })
 
   }  
   getOrcamento(id:string){

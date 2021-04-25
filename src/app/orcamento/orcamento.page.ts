@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import { ServiceService, Processo } from '../service.service';
 import { Router } from '@angular/router';
 import { ItemPage } from '../item/item.page';
+import { ModalOrcamentoPage } from '../modal-orcamento/modal-orcamento.page';
+import { BrMaskDirective, BrMaskModel } from 'br-mask';
 
 @Component({
   selector: 'app-orcamento',
@@ -16,13 +18,25 @@ export class OrcamentoPage implements OnInit {
   userID
   user
   valor = '';
-  produtos: Array<Processo> = [];
+  produtos: Array<any> = [];
   produto = '';
-  constructor(public navCtrl: NavController,public router:Router,public services:ServiceService, public storage: Storage, public modal:ModalController) { }
+  testy
+  valorTotal
+  constructor(public navCtrl: NavController,public brMask: BrMaskDirective,public router:Router,public services:ServiceService, public storage: Storage, public modale:ModalController) { }
 
   ngOnInit() {
     this.start()
-    this.produtos.push(this.orcamento)
+    this.valorTotal = 0
+    this.orcamento.orcamento.forEach(element => {
+      this.produtos.push({
+        nome:element.nome,
+        quantity:element.quantity,
+        obs:element.obs,
+        foto: undefined,
+        valor:0,
+        disponivel: 'Não avaliado'
+      })
+    });
     console.log(this.produtos)
   }
   start(){
@@ -46,14 +60,11 @@ export class OrcamentoPage implements OnInit {
     })
   }
   enviarPro(){
-    if(this.valor != ''){
-      console.log(this.valor)
-      var x = this.valor.replace(',', '')
+      console.log(this.valorTotal)
+      var x = this.valorTotal.replace(',', '')
       var y = Number(x)
-      this.services.updateOrcamentoVal(this.orcamento.id, y, this.valor)
-    }else{
-      alert('Por favor, digite o valor para o orçamento do seu cliente!')
-    }
+      this.services.updateOrcamentoVal(this.orcamento.id, y, this.valorTotal, this.produtos)
+ 
   }
   adicionar(index:number){
     console.log(index)
@@ -68,11 +79,51 @@ export class OrcamentoPage implements OnInit {
     this.produtos[index].quantity -= 1;
     console.log(this.produtos[index])
   }
+
   dismiss(){
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
-    this.modal.dismiss({
+    this.modale.dismiss({
       'dismissed': true
     });
+  }
+  async modalAnswer(itens,i){
+    const modal = await this.modale.create({
+      componentProps:{
+        'orcamento': itens,
+        'id': i
+      },
+      showBackdrop:true,
+      component: ModalOrcamentoPage,
+      cssClass: 'my-custom-modal-css'
+    });
+     await modal.present();
+     await modal.onDidDismiss().then((r) => {
+      this.testy = r.data.data;
+      let id = r.data.id
+      console.log(id)
+      if(this.testy === undefined){
+        console.log("indefinido")
+      }else{
+        this.produtos.splice(id, 1)
+        this.testy.forEach(element => {
+          this.produtos.push(element)
+        });
+        console.log("the result:", r , 'test'+ this.testy);
+        console.log(this.produtos)
+        this.somaTudo()
+      }
+
+    })
+  }
+  somaTudo(){
+    let mapVal = this.produtos.map(i => Number(i.valor)).reduce((a, b) =>   a + b, 0 )
+    console.log(mapVal)
+    if(mapVal){
+      const config: BrMaskModel = new BrMaskModel()
+      config.money = true;
+      this.valorTotal =  this.brMask.writeValueMoney(String(mapVal),config)
+      //this.valorTotal = mapVal
+    }
   }
 }

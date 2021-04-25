@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title></ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()"  color="light">
+        <ion-icon color="dark" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div style="text-align: center;
+  padding: 80px;">
+     <ion-button *ngIf="foto === undefined" style="font-size: 30px;" color="dark" fill="clear">
+      <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
+    </ion-button> 
+    <img src="{{foto}}" *ngIf="foto !== undefined"/>
+  </div>
+  <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" multiple="false" />
+
+  <div style="text-align: center;">
+    <h4>
+      {{orcamento?.quantity}} {{orcamento?.nome}}
+    </h4>
+    <h6>
+      Observações: {{orcamento?.obs}}
+    </h6>
+  </div>
+  <div style="text-align: center; ">
+    <label style="margin: 10px;" for="valor">Valor:</label>
+    <input [(ngModel)]="valor" style="border: 1px solid lightgray;
+    padding: 5px;width: 60%;" placeholder="Digite o valor do produto..." name="valor" [(ngModel)]="valor"
+    [brmasker]="{money: true}" type="text" />
+  </div>
+  <div style="text-align: center; ">
+    <p>Quantidade</p>
+          <ion-button *ngIf="quantidade >= 1" color="warning" style="margin-right: 5%;" (click)="retirar()">
+            <ion-icon name="remove-outline"></ion-icon>
+          </ion-button>
+          
+            {{quantidade}}
+          
+          <ion-button  *ngIf="quantidade < quantidade2"  style="margin-left: 5%;" color="warning" (click)="adicionar()">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="updateOrc()" expand="block" color="warning">Salvar</ion-button>
+
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" (click)="notHave()" color="danger">Não tenho</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

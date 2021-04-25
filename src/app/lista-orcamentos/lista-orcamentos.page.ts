@@ -16,6 +16,7 @@ export class ListaOrcamentosPage implements OnInit {
   userID:any;
   user:any;
   orcamentos:any;
+  testy:any
   constructor(public navCtrl: NavController,public router:Router,public services:ServiceService, public storage: Storage, public modal:ModalController) { }
 
   ngOnInit() {
@@ -52,6 +53,6 @@ export class ListaOrcamentosPage implements OnInit {
       component: OrcamentoPage,
       cssClass: 'my-custom-class'
     });
-    return await modal.present();
+  return await modal.present();
   }
 }
