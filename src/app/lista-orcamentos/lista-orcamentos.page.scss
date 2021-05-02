@@ -1,0 +1,29 @@
+ion-header, ion-toolbar{
+    --background: linear-gradient(90deg,#6094DB 0%, rgb(96 148 219 / 85%) 35%, rgb(96 148 219 / 47%) 100%);
+    color:white;
+
+    ion-item{
+        --background: linear-gradient(90deg,rgb(255 193 7) 0%,rgb(255 193 7 / 52%) 35%, rgb(255 193 7 / 18%) 100%);;
+
+        padding: 0 10px;
+    }
+    ion-toolbar{
+        .bordered{
+            --border-radius:10px;
+            --box-shadow:5px 5px 10px #d1d1d1, -5px -5px 10px #FFFFFF
+        }
+    }
+    ion-item{
+        h3{
+            font-weight: 700;
+            font-size: 14px;
+        }
+        p{
+            font-weight: 500;
+            font-size: 14px;
+        }
+        ion-avatar{
+            --border-radius:40%
+        }
+    }
+}
