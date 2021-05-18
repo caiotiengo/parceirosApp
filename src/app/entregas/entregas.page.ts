@@ -7,7 +7,10 @@ import { Plugins } from '@capacitor/core';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
+import { ServiceService } from '../service.service';
+import { ItemPage } from '../item/item.page';
+import * as _ from 'lodash';
+import { AngularFirestore } from '@angular/fire/firestore';
 @Component({
   selector: 'app-entregas',
   templateUrl: './entregas.page.html',
@@ -24,8 +27,17 @@ export class EntregasPage implements OnInit {
   user:any;
   tipoCarro:any;
   pesoEntrega:any;
-  precoCalculado:string
-  constructor(public storage: Storage,public loadingController: LoadingController, public navCtrl: NavController,public router: Router,private httpClient: HttpClient) { 
+  precoCalculado:string;
+  vendas
+  userID
+  todas: Array<any> = []
+  prevendas: Array<any> = []
+  hide = true
+  hide2 = false
+  idOrder
+  pedidoCalculado
+  constructor(public storage: Storage, public services: ServiceService,public afStore: AngularFirestore,
+    public loadingController: LoadingController, public navCtrl: NavController,public router: Router,private httpClient: HttpClient) { 
 
   }
   httpOptions = {
@@ -43,7 +55,10 @@ export class EntregasPage implements OnInit {
     })
     await loading.present();
 
-
+    this.storage.get('id').then(async x =>{
+      this.userID = x;
+      console.log(this.userID)
+    })
 
     this.storage.get('usuario').then(async data =>{
       this.user = data;
@@ -53,6 +68,21 @@ export class EntregasPage implements OnInit {
           "name":this.user.nome,
           "phone":"55"+this.user.ddd + this.user.telefone
         }
+      })
+      this.services.getVendas().subscribe(y =>{
+        this.vendas = y.filter(i => i.lojaUID === this.userID);
+        this.vendas.forEach(element => {
+          this.todas.push(
+            {
+              "endereco": element.endereco,
+              "telefone":'55' + element.telefoneComprador,
+              "nome": element.nomeComprador,
+              "nPedido": element.nPedido
+            }
+          )
+          console.log(this.todas)
+        });
+        console.log(this.vendas)
       })
       await loading.dismiss();
 
@@ -110,7 +140,26 @@ export class EntregasPage implements OnInit {
 
       this.postRequest('https://robotapitest.clickentregas.com/api/business/1.1/create-order', this.pontos).subscribe(async (returnedStuff) => {
         console.log(returnedStuff);
-        await loading.dismiss();
+        let order = JSON.stringify(returnedStuff)
+       let foi = JSON.parse(order)
+       console.log(foi.order.payment_amount)
+       console.log(foi.order.order_id)
+       this.idOrder = foi.order.order_id
+       this.pedidoCalculado  = 'Aguardando Entregador'
+        this.afStore.collection('clickEntregas').add({
+          order_id: foi.order.order_id,
+          matter: foi.order.matter,
+          order_name:foi.order.order_name,
+          lojaUID: this.userID,
+          status_description: foi.order.status_description,
+          dataCriada: foi.order.created_datetime
+        }).then(async ()=>{
+          alert('Estamos procurando um entregador para você!')
+          await loading.dismiss();
+
+          this.navCtrl.navigateForward('/entrega');
+
+        }) 
 
       });
    }
@@ -191,6 +240,20 @@ export class EntregasPage implements OnInit {
 
 
   }
+  calculateAll(){
+    this.prevendas.forEach(data =>{
+      this.pontos.push({
+        "address": data.endereco,
+        "contact_person":{
+          "name":data.nome,
+          "phone":data.telefone
+        }
+      })
+      console.log(this.pontos)
+      
+    })
+    this.calculate()
+  }
   addDestinoAlt(){
     this.endereco = undefined
     this.complemento = undefined
@@ -198,9 +261,37 @@ export class EntregasPage implements OnInit {
     this.cidade = undefined
     this.nomeDestinatario = undefined
   }
+  itemSelected(e,pedido, i){
+    var isChecked = e.currentTarget.checked;
+    console.log(isChecked)
+    if(isChecked === false){
+      this.prevendas.push({
+        "endereco": pedido.endereco,
+        "telefone":'55' + pedido.telefone,
+        "nome": pedido.nome,
+        "nPedido": pedido.nPedido
+      })
+      
+      console.log(this.prevendas)
+    }else{
+     console.log('nada')
+     _.remove(this.prevendas, i => i.nPedido === pedido.nPedido)
+     console.log(this.prevendas)
+    }
+
+  }
+  pedidosFora(){
+    this.hide2 = true;
+    this.hide = false;
+  }
+  pedidosDentro(){
+    this.hide2 = false;
+    this.hide = true;
+  }
   removerLista(i){
     console.log(i)
     this.pontos.splice(i)
+
     console.log(this.pontos)
   }
 }

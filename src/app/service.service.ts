@@ -24,6 +24,7 @@ export interface User {
     tellme: string;
     email: string;
     type?: string;
+    tipo?: string;
     resumo?: string;
     lastEdit?: string;
     comments?:any;
@@ -50,6 +51,7 @@ export interface User {
     numeroBank?:any;
     cupons?:any;
     uid?:any;
+
 }
 export interface Processo {
     // tslint:disable-next-line:indent

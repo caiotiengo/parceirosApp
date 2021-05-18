@@ -8,8 +8,33 @@
 </ion-header>
 
 <ion-content>
-  <p style="text-align:center;">Normalmente, os pedidos de entregador podem levar algum tempo, arrume tudo antes de pedir!</p>
-  <div class="main">
+  <div class="main1" [hidden]="hide2">
+    <p style="text-align:center; color: #bfbfbf;">Normalmente, os pedidos de entregador podem levar algum tempo, arrume tudo antes de pedir!</p>
+
+    <h3 style="text-align: center;">Deseja adicionar pedidos do app?</h3>
+    <p style="text-align: center; color: #bfbfbf;">Selecione quais pedidos você quer colocar na rota.</p>
+    <ion-list *ngFor="let itens of todas; let i = index">
+      <ion-item lines="none" >
+        <ion-checkbox slot="start" (click)="itemSelected($event,itens, i)" color="axe"></ion-checkbox>
+        <ion-label>
+          <h2>{{itens.nPedido}}
+          </h2>
+          <p>{{itens.endereco}}</p>
+        </ion-label>
+      </ion-item>
+ 
+    </ion-list>
+    <ion-button  expand="block" (click)="calculateAll()" color="axe" style="font-size: 15px;">        
+      Calcular 
+  </ion-button>
+  <ion-button fill="clear" expand="block" (click)="pedidosFora()" >Adicionar pedidos de fora do App</ion-button>
+
+  </div>
+  <div class="main" [hidden]="hide">
+    <p style="text-align:center; color: #bfbfbf;">Normalmente, os pedidos de entregador podem levar algum tempo, arrume tudo antes de pedir!</p>
+
+    <ion-button fill="clear" expand="block" (click)="pedidosDentro()" >Adicionar pedidos do App</ion-button>
+
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col>
@@ -101,6 +126,11 @@
     <ion-button color="axe" style="color: white;" (click)="calDesti()"  expand="block">Calcular</ion-button>
 
   </div>
+
+  <h3 style="text-align: center;
+  color: #bfbfbf;
+  border-top: solid 1px black;
+  padding: 10px;">Endereços para entrega</h3>
   <ion-list>
     <ion-item lines="none" *ngFor="let itens of pontos; let i = index">        
       <p slot="start" *ngIf="i === 0" style="font-size: 14px; opacity: 0.7;">{{itens.address}}
@@ -117,7 +147,7 @@
   <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col>
-       <ion-item>
+       <ion-item lines="none">
          <h4>R${{precoCalculado}}</h4>
        </ion-item>
       </ion-col>

@@ -18,6 +18,8 @@ export class LoginPage implements OnInit {
   }
 
    async login(){
+    this.storage.clear()
+
      const loading = await this.loadingController.create({
         message: 'Carregando...'
      });
@@ -25,13 +27,22 @@ export class LoginPage implements OnInit {
       this.services.SignIn(this.email,this.senha).then(async (data) =>{
         console.log(data)
         this.services.getLoja(data.user.uid).subscribe(async y =>{
-          this.storage.set('id', data.user.uid).then(async x =>{
+          console.log(y)
+          if(y.tipo === 'Loja'){
+            this.storage.set('id', data.user.uid).then(async x =>{
+              await loading.dismiss()
+              this.navCtrl.navigateRoot('/home')
+            }, async err =>{
+              console.log(err)
+              await loading.dismiss()
+            })
+          }else{
+            alert('Você não tem uma conta de lojista, Baixe o App "Axé Delivery" ou cadastre sua loja na página anterior!');
+            this.storage.clear()
             await loading.dismiss()
-            this.navCtrl.navigateRoot('/home')
-          }, async err =>{
-            console.log(err)
-            await loading.dismiss()
-          })
+
+          }
+
         }, async e =>{
           console.log(e)
           alert(e)

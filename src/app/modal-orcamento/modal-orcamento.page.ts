@@ -32,6 +32,7 @@ export class ModalOrcamentoPage implements OnInit {
 
   ngOnInit() {
     console.log(this.orcamento)
+    this.produtos.push(this.orcamento)
     console.log(this.foto)
     this.quantidade = this.orcamento.quantity
     this.quantidade2 = this.orcamento.quantity
@@ -111,6 +112,7 @@ export class ModalOrcamentoPage implements OnInit {
   dismiss(){
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
+    console.log(this.produtos)
     this.modalz.dismiss({
       'dismissed': true,
       data: this.produtos,
