@@ -61,9 +61,20 @@ export class OrcamentoPage implements OnInit {
   }
   enviarPro(){
       console.log(this.valorTotal)
-      var x = this.valorTotal.replace(',', '')
+      var x = this.valorTotal.replace('.', '')
+     // var x = this.valorTotal.replace(',', '')
       var y = Number(x)
-      this.services.updateOrcamentoVal(this.orcamento.id, y, this.valorTotal, this.produtos)
+      console.log(y)
+      var z = x.replace(',','.')
+      var h = this.orcamento.valorFrete.toFixed(2)
+      console.log(h)
+      var o = Number(z) + Number(h)
+      var valor = o.toFixed(2)
+      console.log(o)
+      console.log(x)
+      console.log(this.orcamento.id, y, valor, this.produtos)
+      this.services.updateOrcamentoVal(this.orcamento.id, y, valor, this.produtos)
+      this.dismiss()
  
   }
   adicionar(index:number){

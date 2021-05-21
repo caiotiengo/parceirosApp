@@ -47,7 +47,7 @@
 
 <div class="container">
   <h2>Menu</h2>
-  <ion-item (click)="entregasPage()" lines="none">
+  <ion-item (click)="entregasPage()" *ngIf="user?.optEntregas === 'Sim'" lines="none">
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="3">

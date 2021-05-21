@@ -13,10 +13,10 @@
 
   <div style="text-align: center;
   padding: 80px;">
-     <ion-button *ngIf="foto === undefined" style="font-size: 30px;" color="dark" fill="clear">
+     <ion-button *ngIf="orcamento?.foto === 'Sem foto'" style="font-size: 30px;" color="dark" fill="clear">
       <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
     </ion-button> 
-    <img src="{{foto}}" *ngIf="foto !== undefined"/>
+    <img *ngIf="orcamento?.foto !== 'Sem foto'" src="{{foto}}" />
   </div>
   <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" multiple="false" />
 
@@ -36,13 +36,13 @@
   </div>
   <div style="text-align: center; ">
     <p>Quantidade</p>
-          <ion-button *ngIf="quantidade >= 1" color="warning" style="margin-right: 5%;" (click)="retirar()">
+          <ion-button *ngIf="qtdRes >= 1" color="warning" style="margin-right: 5%;" (click)="retirar()">
             <ion-icon name="remove-outline"></ion-icon>
           </ion-button>
           
-            {{quantidade}}
+            {{qtdRes}}
           
-          <ion-button  *ngIf="quantidade < quantidade2"  style="margin-left: 5%;" color="warning" (click)="adicionar()">
+          <ion-button  *ngIf="qtdRes < qtdRes2"  style="margin-left: 5%;" color="warning" (click)="adicionar()">
             <ion-icon name="add-outline"></ion-icon>
           </ion-button>
   </div>

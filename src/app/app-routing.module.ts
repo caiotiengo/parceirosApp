@@ -97,6 +97,14 @@ const routes: Routes = [
   {
     path: 'modal-orcamento',
     loadChildren: () => import('./modal-orcamento/modal-orcamento.module').then( m => m.ModalOrcamentoPageModule)
+  },
+  {
+    path: 'modal-produtos',
+    loadChildren: () => import('./modal-produtos/modal-produtos.module').then( m => m.ModalProdutosPageModule)
+  },
+  {
+    path: 'modal-detalhes',
+    loadChildren: () => import('./modal-detalhes/modal-detalhes.module').then( m => m.ModalDetalhesPageModule)
   }
 ];
 @NgModule({

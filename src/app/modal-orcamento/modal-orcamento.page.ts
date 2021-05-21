@@ -15,6 +15,8 @@ export class ModalOrcamentoPage implements OnInit {
 
   quantidade: number;
   quantidade2: number;
+  qtdRes: number;
+  qtdRes2:number;
   valor:any;
   produtos: Array<any> = [];
   foto:any;
@@ -33,43 +35,58 @@ export class ModalOrcamentoPage implements OnInit {
   ngOnInit() {
     console.log(this.orcamento)
     this.produtos.push(this.orcamento)
+    console.log(this.produtos)
     console.log(this.foto)
     this.quantidade = this.orcamento.quantity
     this.quantidade2 = this.orcamento.quantity
+    this.qtdRes = this.orcamento.quantity
+    this.qtdRes2 = this.orcamento.quantity
   }
   adicionar(){
 
-    this.quantidade += 1;
+    this.qtdRes += 1;
     
-    console.log(this.quantidade)
+    console.log(this.qtdRes)
   }
   retirar(){
 
-    this.quantidade -= 1;
-    console.log(this.quantidade)
+    this.qtdRes -= 1;
+    console.log(this.qtdRes)
   }
   updateOrc(){
     let valor = this.valor.replace(',','')
-    this.produtos.push({
-      nome: this.orcamento.nome,
-      quantity: this.quantidade,
-      obs:this.orcamento.obs,
-      valor: valor,
-      foto:this.foto,
-      disponivel: true
-    })
+      this.orcamento.nome = this.orcamento.nome;
+      this.orcamento.quantity = this.quantidade;
+      this.orcamento.obs = this.orcamento.obs;
+      this.orcamento.qtdRes = this.qtdRes;
+      this.orcamento.valor = valor;
+      if(this.foto === undefined){
+        this.orcamento.foto = "Sem foto";
+
+      }else{
+        this.orcamento.foto = this.foto;
+
+      }
+      this.orcamento.disponivel = true;
     console.log(this.produtos)
     this.dismiss()
   }
   notHave(){
-    this.produtos.push({
-      nome: this.orcamento.nome,
-      quantity: this.quantidade,
-      obs:this.orcamento.obs,
-      valor: 0,
-      foto:this.foto,
-      disponivel: false
-    })
+      var valor = "0,00"
+      this.orcamento.nome = this.orcamento.nome;
+      this.orcamento.quantity = this.quantidade;
+      this.orcamento.obs = this.orcamento.obs;
+      this.orcamento.qtdRes = this.qtdRes;
+      this.orcamento.valor = valor ;
+
+      if(this.foto === undefined){
+        this.orcamento.foto = 'Sem foto';
+
+      }else{
+        this.orcamento.foto = this.foto;
+
+      }
+      this.orcamento.disponivel = false;
     console.log(this.produtos)
     this.dismiss()
   }
