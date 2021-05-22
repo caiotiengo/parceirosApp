@@ -61,12 +61,13 @@ export class OrcamentoPage implements OnInit {
   }
   enviarPro(){
       console.log(this.valorTotal)
+      console.log(this.orcamento.valorFrete)
       var x = this.valorTotal.replace('.', '')
      // var x = this.valorTotal.replace(',', '')
       var y = Number(x)
       console.log(y)
       var z = x.replace(',','.')
-      var h = this.orcamento.valorFrete.toFixed(2)
+      var h = this.orcamento.valorFrete
       console.log(h)
       var o = Number(z) + Number(h)
       var valor = o.toFixed(2)

@@ -12,7 +12,6 @@
     <ion-card *ngFor="let items of orcamentos">
       <ion-card-header>
         <h2 style="text-align: center;">{{items.nomeComprador}}</h2>
-        <p  style="text-align: center;" *ngIf="items.valor != 0">R${{items.valor}}</p>
         <p  style="text-align: center;
         padding: 10px;
         border-radius: 5px;
@@ -28,7 +27,7 @@
         
         <!--ion-button color="warning" expand="block" *ngIf="items.valor === 0"  (click)="chat(items)">Chat</ion-button-->
 
-        <ion-button color="light" expand="block"  (click)="modalItem(items)">Mais informações</ion-button>
+        <ion-button color="light" expand="block" *ngIf="items.valor === 0"   (click)="modalItem(items)">Mais informações</ion-button>
 
       </ion-card-content>
     </ion-card>
