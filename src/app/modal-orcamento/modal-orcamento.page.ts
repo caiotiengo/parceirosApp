@@ -3,6 +3,7 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ServiceService } from '../service.service';
 import { Observable } from 'rxjs';
+import { BrMaskDirective, BrMaskModel } from 'br-mask';
 
 @Component({
   selector: 'app-modal-orcamento',
@@ -30,7 +31,7 @@ export class ModalOrcamentoPage implements OnInit {
   evento: Array<any> = [];
   files: Array<any> = [];
   city: Array<any> = [];
-  constructor(public storage: Storage,public loading: LoadingController,public services:ServiceService, public modalz:ModalController) { }
+  constructor(public storage: Storage,public loading: LoadingController,public brMask: BrMaskDirective,public services:ServiceService, public modalz:ModalController) { }
 
   ngOnInit() {
     console.log(this.orcamento)
@@ -54,7 +55,14 @@ export class ModalOrcamentoPage implements OnInit {
     console.log(this.qtdRes)
   }
   updateOrc(){
-    let valor = this.valor.replace(',','')
+    if(this.valor){
+      const config: BrMaskModel = new BrMaskModel()
+      config.money = true;
+      this.orcamento.valorHTML =  this.brMask.writeValueMoney(String(this.valor),config)
+      //this.valorTotal = mapVal
+    }
+      console.log(this.valor)
+      let valor = this.valor.replace(',','')
       this.orcamento.nome = this.orcamento.nome;
       this.orcamento.quantity = this.quantidade;
       this.orcamento.obs = this.orcamento.obs;
@@ -72,7 +80,8 @@ export class ModalOrcamentoPage implements OnInit {
     this.dismiss()
   }
   notHave(){
-      var valor = "0,00"
+      this.orcamento.valorHTML = '0'
+      var valor = "0000"
       this.orcamento.nome = this.orcamento.nome;
       this.orcamento.quantity = this.quantidade;
       this.orcamento.obs = this.orcamento.obs;

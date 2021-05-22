@@ -158,6 +158,7 @@ export interface Orcamento{
   nomeComprador?:string;
   nomeLoja?:string;
   chat?:any;
+  valorHTML?:string;
 }
 @Injectable({
   providedIn: 'root'
@@ -505,13 +506,14 @@ updateEnd(id: string, tipo:string, end: string, cep:string, bairro:string,comple
   deleteOrcamento(id:string,item:any){
     this.orcamentoCollection.doc<Orcamento>(id).update({orcamento: firebase.firestore.FieldValue.arrayRemove(item)})  
    }
-  updateOrcamentoVal(id:string, price:number, valor:string, produtos:any){
+  updateOrcamentoVal(id:string, price:number, valor:string, produtos:any, valorHTM:string){
     //const data = produtos;
   //  console.log(data)
     this.orcamentoCollection.doc<Orcamento>(id).update({
       price:price, 
       valor:valor,
-      orcamento:produtos
+      orcamento:produtos,
+      valorHTML:valorHTM
     })
 
   }  

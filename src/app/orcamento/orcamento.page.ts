@@ -72,8 +72,8 @@ export class OrcamentoPage implements OnInit {
       var valor = o.toFixed(2)
       console.log(o)
       console.log(x)
-      console.log(this.orcamento.id, y, valor, this.produtos)
-      this.services.updateOrcamentoVal(this.orcamento.id, y, valor, this.produtos)
+      console.log(this.orcamento.id, y, valor, this.produtos, x )
+      this.services.updateOrcamentoVal(this.orcamento.id, y, valor, this.produtos, x)
       this.dismiss()
  
   }
