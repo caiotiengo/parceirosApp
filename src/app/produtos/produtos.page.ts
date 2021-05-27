@@ -265,6 +265,9 @@ export class ProdutosPage implements OnInit {
 
     await alert.present();
   }
+  produtosPre(){
+    this.navCtrl.navigateForward('/lista-produtos')
+  }
   deletarItem(items){
     this.services.deletarItem(items.id).then(() =>{
       alert('Seu produto foi deletado com sucesso!');

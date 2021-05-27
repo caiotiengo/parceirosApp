@@ -1,9 +1,56 @@
-<ion-header>
+<ion-header  class="ion-no-border">
   <ion-toolbar>
-    <ion-title>modal-produtos</ion-title>
+    <ion-title>Informações adicionais</ion-title>
+    <ion-icon name="close" style="font-size: 25px;
+    margin-right: 15px;" (click)="dismiss()" slot="end"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="email-div">
+          <label for="quantidade">Quantidade</label>
+          <input type="number" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="qtd"  id="quantidade"/>    
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="email-div">
+          <label for="valor">Valor</label>
+          <input name="valor" [(ngModel)]="valor"
+					[brmasker]="{money: true}" type="text"/>    
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row [hidden]="hide">
+      <ion-col>
+        <div class="email-div">
+          <label for="Variedade">Variedade</label>
+          <input  [(ngModel)]="variedade" type="text" id="Variedade"/>    
+        </div>
+      </ion-col>
+      <ion-col>
+        <ion-button style="margin-top: 16%;" [hidden]="hide" expand="full" (click)="addItem()" color="success">
+          Adicionar  
+         </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button color="dark" fill="outline" (click)="dismiss()" expand="block">Desistir</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="axe"  (click)="caio()" expand="block">Cadastrar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button expand="block" [hidden]="todosx" (click)="abrir()">Incluir Variedade</ion-button>
+  <ion-list>
+    <ion-item *ngFor="let items of check">
+      <ion-label>{{items.value}}</ion-label>
+      <ion-button color="danger" slot="end" (click)="deletaItem(items)">Excluir</ion-button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

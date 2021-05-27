@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Produtos pré-cadastrados</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" text="Voltar"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="none" button *ngFor="let itens of listaProdutos?.produtos; let i = index;" (click)="presentModal(itens)">
+      <ion-avatar slot="start">
+        <img src="{{itens.foto}}"/>
+      </ion-avatar>
+      <ion-label>
+        <h4>{{itens.Produto}}</h4>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

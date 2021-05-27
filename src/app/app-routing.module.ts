@@ -105,6 +105,10 @@ const routes: Routes = [
   {
     path: 'modal-detalhes',
     loadChildren: () => import('./modal-detalhes/modal-detalhes.module').then( m => m.ModalDetalhesPageModule)
+  },
+  {
+    path: 'lista-produtos',
+    loadChildren: () => import('./lista-produtos/lista-produtos.module').then( m => m.ListaProdutosPageModule)
   }
 ];
 @NgModule({

@@ -10,6 +10,17 @@
 <ion-content>
   <ion-list>
     <ion-card *ngFor="let items of orcamentos">
+      <p style="text-align: center;
+      background: #4c8dff;
+      color: white;
+      width: 55%;
+      margin: 0px;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-left: -20px;
+      box-shadow: 1px 1px lightgrey;
+      margin-top: 5%;">{{items.dia | date: 'dd/MM/YYYY HH:mm'}}</p>
       <ion-card-header>
         <h2 style="text-align: center;">{{items.nomeComprador}}</h2>
         <p  style="text-align: center;
@@ -21,13 +32,19 @@
         padding: 10px;
         background: #f5da08;
         border-radius: 5px;
-        color: black;" *ngIf="items.valor != 0">Orçamento enviado! Aguardando conclusão!</p>
+        color: black;" *ngIf="items.status != 'Aprovado' && items.valor != 0">Orçamento enviado! Aguardando conclusão!</p>
+        <p style="text-align: center;
+        padding: 10px;
+        font-weight: bold;
+        background: gray;
+        border-radius: 5px;
+        color: white;" *ngIf="items.status != 'Aguardando Valores'">{{items.status}}!</p>
       </ion-card-header>
       <ion-card-content>
         
         <!--ion-button color="warning" expand="block" *ngIf="items.valor === 0"  (click)="chat(items)">Chat</ion-button-->
 
-        <ion-button color="light" expand="block" *ngIf="items.valor === 0"   (click)="modalItem(items)">Mais informações</ion-button>
+        <ion-button color="light" expand="block" *ngIf="items.valor === 0 && items.status != 'Pago'"   (click)="modalItem(items)">Mais informações</ion-button>
 
       </ion-card-content>
     </ion-card>
