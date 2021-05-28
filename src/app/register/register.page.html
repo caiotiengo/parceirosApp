@@ -7,24 +7,25 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-fab vertical="top" horizontal="start" slot="fixed">
-  <ion-fab-button color="dark" (click)="voltar()"  [hidden]="started">
-    <ion-icon  name="arrow-back-outline"></ion-icon>
-  </ion-fab-button>
-  <ion-fab-button color="dark" (click)="iniciar()"  [hidden]="primeiraDiv">
-    <ion-icon  name="arrow-back-outline"></ion-icon> 
-  </ion-fab-button>
-  <ion-fab-button color="dark" (click)="primeiroPasso()"  [hidden]="segundaDiv">
-    <ion-icon  name="arrow-back-outline"></ion-icon> 1
-  </ion-fab-button>
-  <ion-fab-button color="dark" (click)="segundoPasso()"  [hidden]="terceiraDiv">
-    <ion-icon  name="arrow-back-outline"></ion-icon> 2
-  </ion-fab-button>
-  <ion-fab-button color="dark" (click)="terceiroPasso()"  [hidden]="quartaDiv">
-    <ion-icon  name="arrow-back-outline"></ion-icon> 3
-  </ion-fab-button>
-</ion-fab>
+
 <ion-content>
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button color="dark" (click)="voltar()"  [hidden]="started">
+      <ion-icon  name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="dark" (click)="iniciar()"  [hidden]="primeiraDiv">
+      <ion-icon  name="arrow-back-outline"></ion-icon> 
+    </ion-fab-button>
+    <ion-fab-button color="dark" (click)="primeiroPasso()"  [hidden]="segundaDiv">
+      <ion-icon  name="arrow-back-outline"></ion-icon> 1
+    </ion-fab-button>
+    <ion-fab-button color="dark" (click)="segundoPasso()"  [hidden]="terceiraDiv">
+      <ion-icon  name="arrow-back-outline"></ion-icon> 2
+    </ion-fab-button>
+    <ion-fab-button color="dark" (click)="terceiroPasso()"  [hidden]="quartaDiv">
+      <ion-icon  name="arrow-back-outline"></ion-icon> 3
+    </ion-fab-button>
+  </ion-fab>
   <div [hidden]="started" class="header-page">
     <h4>Vamos iniciar o cadastro da sua loja...</h4>
     <p>São 4 passos para finalizar o cadastro!</p>
@@ -213,7 +214,7 @@
     <div class="input-div">
       <label for="cnpj" class="cnpj">CNPJ</label>
       <input placeholder="Digite aqui o CNPJ da loja..."  maxlength="40" [brmasker]="{person: true}" [(ngModel)]="CNPJ" type="text">
-      <label *ngIf="banco === undefined || banco === ''" class="required">* CNPJ é obrigatório </label>
+      <label *ngIf="CNPJ === undefined || CNPJ === ''" class="required">* CNPJ é obrigatório </label>
 
     </div>
     <ion-select placeholder="Escolha se é Corrente ou Poupança"  [(ngModel)]="correnteoupou">
@@ -270,13 +271,17 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <p style="text-align: center;">Escolha uma foto para o perfil da sua loja</p>
+    <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" />
+    <label style="text-align: center;" *ngIf="url === undefined || url === ''" class="required">* Foto de perfil é obrigatório </label>
+
     <ion-button color="white" fill="clear" style="text-align:center; color:black;"(click)="politica()">Politica de Privacidade</ion-button> 
 		<ion-item>
 			<ion-label>Confirmo que li e concordo com os termos.</ion-label>
 			<ion-checkbox [(ngModel)]="check"></ion-checkbox>
 		</ion-item>
 		
-    <ion-button expand="block" (click)="quintoPasso()" color="axe">Finalizar Cadastro</ion-button>
+    <ion-button expand="block" (click)="checklistUsuario()" color="axe">Finalizar Cadastro</ion-button>
 
   </div>
   <div [hidden]="quintaDiv" class="quinta-div">
@@ -295,7 +300,7 @@
         <ion-button  slot="end">
           Adicionar
         </ion-button>
-        <!--ion-button *ngIf="" slot="end">
+        <ion-button *ngIf="" slot="end">
           Adicionar
         </ion-button>
       </ion-item>
@@ -317,9 +322,10 @@
 <ion-button (click)="entrarNoApp()" expand="block" [hidden]="quintaDiv" >
   Entrar no app
 </ion-button>
-<ion-button expand="block" fill="outline" color="success"> 
-  <ion-icon name="logo-whatsapp"></ion-icon>
-  Dúvidas? Clique aqui!     
-</ion-button>
+<ion-button href="https://wa.me/5521997955586" expand="block" fill="outline" color="success"> 
+	<ion-icon name="logo-whatsapp"></ion-icon>
+	Dúvidas? Clique aqui!     
+  </ion-button>
+	
   
 </ion-footer>

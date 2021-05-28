@@ -32,7 +32,7 @@ ion-content{
         padding: 14px;
         border-radius: 14px;
         box-shadow: none;
-        background: rgb(255,255,255,.8);
+        background: #ffffffcc;
         .main{
             //width: 60px;
             //height: 60px;
@@ -58,7 +58,7 @@ ion-content{
         padding: 6px 20px;
         color:black;
         ion-item{
-            --background: rgb(255 255 255 / 67%);
+            --background: rgba(255 255 255 / 67%);
             padding: 0;
             margin: 14px 0;
             --border-radius:14px;

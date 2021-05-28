@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ServiceService } from '../service.service';
 import { Storage } from '@ionic/storage';
 import { NavController, LoadingController } from '@ionic/angular';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +29,10 @@ export class LoginPage implements OnInit {
         console.log(data)
         this.services.getLoja(data.user.uid).subscribe(async y =>{
           console.log(y)
-          if(y.tipo === 'Loja'){
+          if(y.tipo === "Loja"){
             this.storage.set('id', data.user.uid).then(async x =>{
+              this.storage.remove('usuario')
+
               await loading.dismiss()
               this.navCtrl.navigateRoot('/home')
             }, async err =>{
@@ -37,7 +40,6 @@ export class LoginPage implements OnInit {
               await loading.dismiss()
             })
           }else{
-            alert('Você não tem uma conta de lojista, Baixe o App "Axé Delivery" ou cadastre sua loja na página anterior!');
             this.storage.clear()
             await loading.dismiss()
 
@@ -51,6 +53,21 @@ export class LoginPage implements OnInit {
       }, async erro =>{
         console.log(erro)
       })
+
+  }
+  senhaEsquecida(){
+    console.log(this.email)
+    if(this.email){
+      console.log(this.email)
+      var auth = firebase.default.auth()
+      var emailAddress = this.email;
+      auth.sendPasswordResetEmail(emailAddress).then((res)=>{
+        console.log(res)
+        alert('Tudo certo! Corre no seu email agora para resetar a senha!')
+      })
+    }else{
+      alert('Opa! Digite por favor o seu email no campo "Email" e clique em "Esqueceu a senha?" novamente.')
+    }
 
   }
 

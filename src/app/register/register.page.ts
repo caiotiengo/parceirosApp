@@ -1,11 +1,25 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import moipSdk from 'moip-sdk-node'
 import { ServiceService } from '../service.service';
-import { NavController, ModalController, LoadingController } from '@ionic/angular';
+import { NavController, ModalController, LoadingController, Platform } from '@ionic/angular';
 import { PoliticaPage } from '../politica/politica.page';
 import { AngularFireAuth } from '@angular/fire/auth';
 declare var google;
 import { Storage } from '@ionic/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import {Observable} from 'rxjs'
+import {
+  MediaCapture,
+  MediaFile,
+  CaptureError
+} from '@ionic-native/media-capture/ngx';
+import { File, FileEntry } from '@ionic-native/File/ngx';
+import { Media, MediaObject } from '@ionic-native/media/ngx';
+import {finalize} from 'rxjs/operators';
+import * as _ from 'lodash';
+import { AngularFireStorage } from '@angular/fire/storage';
+
 
 @Component({
   selector: 'app-register',
@@ -72,7 +86,19 @@ export class RegisterPage implements OnInit {
   userUID;
   idMoip;
   tokenMoip;
-  constructor(public services: ServiceService,public storage: Storage , public loadingController: LoadingController, public afAuth: AngularFireAuth,public zone: NgZone, private modalController: ModalController, public navCtrl:NavController) {
+  foto:any;
+  url
+  public donwloadUrl: Observable<string>;
+  public uploadPercent: Observable<number>;
+  barStatus = false;
+  imageUploads = [];
+  evento: Array<any> = [];
+  
+  constructor(public services: ServiceService, private platform: Platform,private camera: Camera,
+    private afStorage: AngularFireStorage,
+   private mediaCapture: MediaCapture,
+   private file: File,
+   private media: Media, public afStore: AngularFirestore,public storage: Storage , public loadingController: LoadingController, public afAuth: AngularFireAuth,public zone: NgZone, private modalController: ModalController, public navCtrl:NavController) {
 
     this.moip = moipSdk({
       /*
@@ -149,7 +175,9 @@ export class RegisterPage implements OnInit {
           .then((res) => {
             console.log(res.user.uid)
             this.userUID = res.user.uid
-            this.segundoPasso()
+            this.storage.set('id', this.userUID).then(()=>{
+              this.segundoPasso()
+            })
           }).catch((e) => {
             console.dir(e)
               var erro = this.errosFirebase.filter(i => i.code === e.code)
@@ -212,12 +240,171 @@ export class RegisterPage implements OnInit {
           this.quartoPasso()
       }).catch((err) => {
           console.log(err)
+          alert(err)
       })
     }) 
 
   }
   // --------- dados do usuario -------- ///
-  finalizar(){
+  checklistUsuario(){
+    if(this.email !='' && this.email != undefined){
+      if(this.senha !='' && this.senha != undefined){
+        if(this.nomeLoja !='' && this.nomeLoja != undefined){
+          console.log('ok nome')
+          if(this.CPF !='' && this.CPF != undefined){
+            console.log('ok cpf')
+            if(this.endereco !='' && this.endereco != undefined){
+              console.log('ok end')
+              if(this.numero != null && this.numero != undefined){
+                console.log('ok num')
+                if(this.cep !='' && this.cep != undefined){
+                  console.log('ok Cep')
+                  if(this.complemento !='' && this.complemento != undefined){
+                    console.log('ok com')
+                    if(this.bairro !='' && this.bairro != undefined){
+                      console.log('ok bairro')
+                      if(this.estado  !='' && this.estado != undefined){
+                        console.log('ok est')
+                        if(this.cidade !='' && this.cidade != undefined){
+                          console.log('ok cid')
+                          if(this.ddd != null && this.ddd != undefined){
+                            console.log('ok ddd')
+                            if(this.telefone !='' && this.telefone != undefined){
+                              console.log('ok Tel')
+                              if(this.numeroBanco != null && this.numeroBanco != undefined){
+                                console.log('ok numerobank')
+                                if(this.latitudeGoogle !='' && this.latitudeGoogle != undefined){
+                                  console.log('ok Lat')
+                                  console.log(this.latitudeGoogle)
+                                  if(this.longitudeGoogle !='' &&  this.longitudeGoogle != undefined){
+                                    console.log('ok lon')
+                                    console.log(this.latitudeGoogle)
+    
+                                    this.finalizar()
+                                  }else{
+                                    alert('Selecione um dos endereços da lista, se o seu endereço não aparece, tente outro.')
+                                  } 
+                                }else{
+                                  alert('Selecione um dos endereços da lista, se o seu endereço não aparece, tente outro.')
+                                }
+                              }else{
+                                alert('Selecione um dos bancos da lista.')
+                              }
+                              
+                            }else{
+                              alert('Preencha o campo "Telefone"')
+                            }
+                          }else{
+                            alert('Preencha o campo "DDD"')
+                          }
+                    
+                        }else{
+                          alert('Preencha o campo "Cidade"')
+                        }
+                      }else{
+                        alert('Preencha o campo "Estado"')
+
+                      }
+
+                    }else{
+                      alert('Preencha o campo "Bairro"')
+                    }
+              
+                  }else{
+                    alert('Preencha o campo "Complemento"')
+                  }
+                }else{
+                  alert('Preencha o campo "CEP"')
+                }
+              }else{
+                alert('Preencha o campo "Número"')
+              }
+            }else{
+              alert('Preencha o campo "Endereço da Loja"')
+            }
+          }else{
+            alert('Preencha o campo "CPF do Responsavél"')
+          }
+        }else{
+          alert('Preencha o campo "Nome Loja"')
+        }
+      }else{
+        alert('Preencha o campo "Senha"')
+      }
+    }else{
+      alert('Preencha o campo "Email"')
+    }
+  }
+  async finalizar(){
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Cadastrando o seu perfil...',
+    });
+    await loading.present();
+    const userid = this.userUID
+    var telefone = this.telefone.replace('-','')
+    console.log(telefone)
+    
+    this.afStore.doc(`users/${userid}`).set({
+        nome: this.nomeLoja,
+        email: this.email,
+        endereco: this.endereco,
+        telefone: telefone,
+        bairro: this.bairro,
+        cidade: this.cidade,
+        lat: this.latitudeGoogle,
+        lng: this.longitudeGoogle,
+        numeroEND: this.numero,
+        CPFCNPJ: this.CPF,
+        CEP: this.cep,
+        complemento: this.complemento,
+        estado: this.estado,
+        idmoip:this.idMoip,
+        nomeNaConta: this.nomeNaConta,
+        numeroBank: this.numeroBanco,
+        optEntregas: "Não",
+        porcentagemAxe: 16,
+        porcentagemLoja: 84,
+        accessToken: this.tokenMoip,
+        agencia: 1,
+        entrega: this.horarioAbrir,
+        seNao:this.horarioFechar,
+        aprovado: "Sim",
+        banco: this.nomeBanco,
+        conta: this.conta,
+        digitoConta:this.digitoConta,
+        correnteoupou: this.correnteoupou,
+        DOB:Date.now(),
+        ddd: this.ddd,
+        fcm: '1',
+        FotoPerfil:this.url,
+        status:'Offline',   
+        tipo: "Loja",
+        unidades:[],
+        CPFconta: this.CNPJconta
+       
+       }).then(async (data)=>{
+         await loading.dismiss()
+         this.quintoPasso()
+       }).catch(async (e) =>{
+        console.dir(e)
+        await loading.dismiss()
+  
+        var erro = this.errosFirebase.filter(i => i.code === e.code)
+        console.log(erro[0].message)
+        if(erro.length > 0){
+          await loading.dismiss()
+  
+          alert('Ops!'+ erro[0].message )
+  
+        }else{
+          await loading.dismiss()
+  
+          alert('Ops!' + e )
+        }
+  
+      })
+       
     
   }
 
@@ -339,8 +526,19 @@ export class RegisterPage implements OnInit {
     this.terceiraDiv = true;
     this.quartaDiv = true;
   }
-  entrarNoApp(){
-    this.navCtrl.navigateRoot('/home')
+  async entrarNoApp(){
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Entrando no app...',
+    });
+    await loading.present();
+    this.services.getLoja(this.userUID).subscribe(data =>{
+      this.storage.set('usuario', data).then(async ( )=>{
+        await loading.dismiss();
+        this.navCtrl.navigateRoot('/home')
+
+      })
+    })
   }
 // ---------- politica ----------- //
 
@@ -414,4 +612,92 @@ SelectSearchResult(item) {
     }
   })
 }
+/*
+  async abrirGaleria1(){
+      const options: CameraOptions = {
+        quality: 60,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        correctOrientation: true,
+        //mediaType: this.camera.MediaType.PICTURE
+    }
+    try{
+      const fileUri: string = await this.camera.getPicture(options)
+      let file: string
+
+      if(this.platform.is('ios')){
+        file = fileUri.split('/').pop();
+      }else{
+        file = fileUri.substring(fileUri.lastIndexOf('/')+1, fileUri.indexOf('?'))
+      }
+      const path: string = fileUri.substring(0, fileUri.lastIndexOf('/'));
+      const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path, file)
+      const blob: Blob = new Blob([buffer],{type:'image/jpeg'})
+      this.uploadPicture(blob)
+    }catch(error){
+      console.error(error)
+    }
+
+  }
+  uploadPicture(blob:Blob){
+    var seq = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+    console.log(seq);
+    const ref = this.afStorage.ref(seq +'.jpeg');
+    const task = ref.put(blob)
+    const don = this.afStorage.ref(seq+'.jpeg');
+    const task2 = don.put(blob)
+    this.uploadPercent = task.percentageChanges();
+    task2.snapshotChanges().pipe(
+        finalize(() => {
+  
+          this.donwloadUrl = don.getDownloadURL();
+          this.donwloadUrl.subscribe(res => {
+            this.url = res;
+            alert('Opa! Concluido! Se quiser, já pode finalizar o seu cadastro!');
+  
+          })
+         
+        })
+      ).subscribe();
+  }
+  */
+  imageName() {
+    const newTime = Math.floor(Date.now() / 1000);
+    return Math.floor(Math.random() * 20) + newTime;
+  }
+ async uploadPhoto(event) {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Carregando foto...',
+    });
+    await loading.present();
+      this.barStatus = true;
+      const idFoto = this.imageName();
+      this.evento = [];
+      let files = event.target.files;
+      if (files) {
+        for (let file of files) {
+          this.services.storeImage(file).then(
+            async (res: any) => {
+                if (res) {
+                    console.log(res);
+                    this.url = res
+                    await loading.dismiss();
+
+                    alert('Foto carregada')
+
+                    this.imageUploads.unshift(res);
+                    this.barStatus = false;
+            }
+          },
+          async (error: any) => {
+            console.log(error)
+            await loading.dismiss();
+            alert(error)
+            this.barStatus = false;
+          });
+          
+        } 
+      }
+  }
 }

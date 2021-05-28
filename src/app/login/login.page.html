@@ -28,7 +28,7 @@
       <label for="senha" class="senha">Senha</label>
       <input type="password" [(ngModel)]="senha"  placeholder="Digite aqui a senha da sua loja..." class="senhaInput">
     </div>
-    <ion-button fill="clear">Esqueceu a senha?</ion-button>
+    <ion-button (click)="senhaEsquecida()"fill="clear">Esqueceu a senha?</ion-button>
     <ion-button expand="block" (click)="login()" color="warning">Entrar</ion-button>
 
   </div>

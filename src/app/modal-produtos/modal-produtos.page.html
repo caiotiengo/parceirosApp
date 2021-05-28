@@ -18,8 +18,8 @@
       <ion-col>
         <div class="email-div">
           <label for="valor">Valor</label>
-          <input name="valor" [(ngModel)]="valor"
-					[brmasker]="{money: true}" type="text"/>    
+          <ion-input name="valor" [(ngModel)]="valor" [brmasker]="{money: true}" type="text"></ion-input>
+
         </div>
       </ion-col>
     </ion-row>
@@ -41,7 +41,7 @@
         <ion-button color="dark" fill="outline" (click)="dismiss()" expand="block">Desistir</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button color="axe"  (click)="caio()" expand="block">Cadastrar</ion-button>
+        <ion-button color="axe"  (click)="create()" expand="block">Cadastrar</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -42,12 +42,13 @@
         </ion-select>
         <ion-button expand="block" fill="solid" color="warning" (click)="save()">Salvar</ion-button>
       </ion-label>
-      <p style="margin-top: 5%;" *ngIf="pedidoCalculado != 'undefined'">Pedido calculado!</p>
+<!--
 
+      <p style="margin-top: 5%;" *ngIf="pedidoCalculado != 'undefined'">Pedido calculado!</p>
       <ion-button style="margin-top: 5%;" *ngIf="user?.estado === 'RJ' && pedidoCalculado === 'undefined'" expand="block" color="axe" (click)="calculate()"> Confirmar pedido</ion-button>
       <ion-button style="margin-top: 5%;" *ngIf="user?.estado === 'RJ' && pedidoCalculado != 'undefined'" expand="block" color="axe" (click)="post()"> Pedir entregador</ion-button>
       <ion-button style="margin-top: 5%;" *ngIf="user?.estado === 'RJ'" expand="block" color="danger" (click)="cancelar(idOrder)">Cancelar entrega e pedido</ion-button>
-
+-->
     </ion-card-content>
 
 

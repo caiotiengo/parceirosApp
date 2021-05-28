@@ -115,6 +115,7 @@ export class UserPage implements OnInit {
   unidadeNumero
   unidadeCidade
   unidadez
+  aprovado
   constructor(public loadingController: LoadingController,public navCtrl: NavController, private storage: Storage,
     public afStore: AngularFirestore, 
     public modalController: ModalController,
@@ -175,6 +176,7 @@ export class UserPage implements OnInit {
         this.status = event.status
         this.complemento = event.complemento
         this.unidadez = event.unidades
+        this.aprovado = event.aprovado
         
         this.services.data2().then( async data =>{
           this.bancos = data;
@@ -313,12 +315,15 @@ export class UserPage implements OnInit {
   }
 
   sair() {
-    
+    this.storage.remove('usuario')
     this.storage.clear().then(() =>{
       this.navCtrl.navigateRoot('/');
 
     });
     
+  }
+  vaiProdutos(){
+    this.navCtrl.navigateForward('/produtos')
   }
 
   // ------ deletar unit ----- //

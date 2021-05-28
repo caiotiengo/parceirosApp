@@ -41,8 +41,10 @@ export class EntregasPage implements OnInit {
 
   }
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json','X-DV-Auth-Token' : '3DC9BC4A5EF965B466436DEF6375B188E2AB3083' ,'Access-Control-Allow-Origin':'*' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json','X-DV-Auth-Token' : '37EEFF5A69728562254333417A15029D4A2B673E' ,'Access-Control-Allow-Origin':'*' })
   }
+   //producao 37EEFF5A69728562254333417A15029D4A2B673E
+  // dev 3DC9BC4A5EF965B466436DEF6375B188E2AB3083
   ngOnInit() {
     this.start();
     this.get()
@@ -95,7 +97,7 @@ export class EntregasPage implements OnInit {
   }
   get() {
 
-    this.getRequest('https://robotapitest.clickentregas.com/api/business/1.1').subscribe((returnedStuff) => {
+    this.getRequest('https://robot.clickentregas.com/api/business/1.1').subscribe((returnedStuff) => {
       console.log(returnedStuff);
       
     });
@@ -138,7 +140,7 @@ export class EntregasPage implements OnInit {
       })
       await loading.present();
 
-      this.postRequest('https://robotapitest.clickentregas.com/api/business/1.1/create-order', this.pontos).subscribe(async (returnedStuff) => {
+      this.postRequest('https://robot.clickentregas.com/api/business/1.1/create-order', this.pontos).subscribe(async (returnedStuff) => {
         console.log(returnedStuff);
         let order = JSON.stringify(returnedStuff)
        let foi = JSON.parse(order)
@@ -182,7 +184,7 @@ export class EntregasPage implements OnInit {
     await loading.present();
 
 
-   this.calculateRequest('https://robotapitest.clickentregas.com/api/business/1.1/calculate-order',this.pontos).subscribe(async (returnedStuff) => {
+   this.calculateRequest('https://robot.clickentregas.com/api/business/1.1/calculate-order',this.pontos).subscribe(async (returnedStuff) => {
      console.log(returnedStuff);
      console.log(returnedStuff.valueOf())
      let order = JSON.stringify(returnedStuff)

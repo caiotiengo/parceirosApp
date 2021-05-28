@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { ItemPage } from '../item/item.page';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +16,15 @@ export class HomePage implements OnInit {
   userID:any;
   user:any;
   vendasAguardando:any;
-  constructor(public navCtrl: NavController,public router:Router,public services:ServiceService, public storage: Storage, public modal:ModalController) { }
+  constructor(private statusBar: StatusBar,public navCtrl: NavController,public router:Router,public services:ServiceService, public storage: Storage, public modal:ModalController) { }
   slidesOptions = {
     slidesPerView: 1.5
   }
   ngOnInit() {
+    this.statusBar.overlaysWebView(false); 
+    this.statusBar.backgroundColorByHexString("#f1f5f8")
+    this.statusBar.show();
+    this.statusBar.styleLightContent();
     this.storage.get('id').then(y => {
       this.userID = y;
      console.log(this.userID)
@@ -29,10 +34,17 @@ export class HomePage implements OnInit {
       }else{
         this.services.getLoja(this.userID).subscribe(da =>{
           this.user = da;
-          this.storage.set('usuario',this.user).then(res =>{
-            console.log(res)
-          })
-          console.log(this.user)
+          if(this.user.tipo === "Loja"){
+            this.storage.set('usuario',this.user).then(res =>{
+              console.log(res)
+            })
+            console.log(this.user)
+          }else{
+            this.storage.clear()
+            alert('Você não tem uma conta de lojista, Baixe o App "Axé Delivery" ou cadastre sua loja na página anterior!');
+            this.navCtrl.navigateRoot('/')
+          }
+
         })
         this.services.getVendas().subscribe(prod =>{
           this.vendasAguardando = prod.filter(i =>i.lojaUID === this.userID && i.statusEnt === "Loja informada")

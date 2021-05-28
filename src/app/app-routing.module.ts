@@ -59,10 +59,6 @@ const routes: Routes = [
     loadChildren: () => import('./politica/politica.module').then( m => m.PoliticaPageModule)
   },
   {
-    path: 'perfil-loja',
-    loadChildren: () => import('./perfil-loja/perfil-loja.module').then( m => m.PerfilLojaPageModule)
-  },
-  {
     path: 'modal-passos',
     loadChildren: () => import('./modal-passos/modal-passos.module').then( m => m.ModalPassosPageModule)
   },
