@@ -12,14 +12,14 @@ import { OrcamentoPage } from '../orcamento/orcamento.page';
   templateUrl: './lista-orcamentos.page.html',
   styleUrls: ['./lista-orcamentos.page.scss'],
 })
-export class ListaOrcamentosPage implements OnInit {
+export class ListaOrcamentosPage  {
   userID:any;
   user:any;
   orcamentos:any;
   testy:any
   constructor(public navCtrl: NavController,public router:Router,public services:ServiceService, public storage: Storage, public modal:ModalController) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.start()
   }
   start(){
@@ -28,7 +28,7 @@ export class ListaOrcamentosPage implements OnInit {
      console.log(this.userID)
 
       if(this.userID === null || this.userID === undefined){
-        this.navCtrl.navigateForward('')
+        this.navCtrl.navigateRoot('/')
       }else{
         this.services.getLoja(this.userID).subscribe(da =>{
           this.user = da;

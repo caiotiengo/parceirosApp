@@ -29,17 +29,17 @@
 
     </ion-card-content>
   </ion-card>
-  <ion-card style="background-color: white !important; ">
+  <!--ion-card style="background-color: white !important; ">
     <h2>Filiais</h2>
     <ion-list>
-      <ion-item *ngFor="let itens of unidadez">
+      <ion-item *ngFor="let itens of filiaz  || async">
         {{itens.endereco}},{{itens.estado}}
           <ion-button slot="end" (click)="pedirDele(itens)">Deletar</ion-button>
       </ion-item>
     </ion-list>
     <ion-button  expand="block" color="axe" (click)="addUni()" >Adicionar Filial</ion-button>
 
-  </ion-card>
+  </ion-card-->
   <ion-card style="background-color: white !important; ">
     <ion-card-content>  
      <h4 style="color: green"> <ion-icon name="cash"></ion-icon> - {{banco}}</h4>
@@ -121,8 +121,8 @@
 </ion-card>
 <ion-card style="background-color: white !important; ">
   <ion-card-content>  
-   <p><i>Horário de Entrega:{{entrega}}</i></p>
-   <p><i>Se ultrapassar esse horário: {{seNao}}</i></p>
+   <p><i>Horário de Entrega / Abertura:{{entrega | date: 'HH:mm'}}</i></p>
+   <p><i>Horário final de Entrega / Encerramento: {{seNao  | date: 'HH:mm'}}</i></p>
     <ion-button expand="block" (click)="updateEntrega()" color="warning">  
       alterar
     </ion-button>
@@ -135,17 +135,16 @@
           <ion-grid>
               <ion-row>
                   <ion-col>
-                      <ion-item>
-                    <ion-label position="floating">Horário de entrega</ion-label>
-                    <ion-input formControlName="entregas" required></ion-input>
-                </ion-item>
-
+                    <div class="input-div">
+                      <label for="horarioFechar" class="horarioFechar">Horário de fechar</label>
+                      <ion-datetime displayFormat="HH:mm" placeholder="Clique aqui" formControlName="entregas"></ion-datetime>
+                    </div>  
                   </ion-col>
                   <ion-col>
-                <ion-item>
-                  <ion-label position="floating">Se ultrapassar esse horário</ion-label>
-                    <ion-input formControlName="senaoEntregas" required></ion-input>
-                </ion-item>
+                    <div class="input-div">
+                      <label for="horarioFechar" class="horarioFechar">Horário de fechar</label>
+                      <ion-datetime displayFormat="HH:mm" placeholder="Clique aqui" formControlName="senaoEntregas"></ion-datetime>
+                    </div>  
                   </ion-col>
               </ion-row>
             </ion-grid>

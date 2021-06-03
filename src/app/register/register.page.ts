@@ -8,7 +8,7 @@ declare var google;
 import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import {Observable} from 'rxjs'
+import {Observable} from 'rxjs';
 import {
   MediaCapture,
   MediaFile,
@@ -27,8 +27,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  email:string;
-  senha:string;
+  email2:string;
+  senha2:string;
   nomeResponsavel:string;
   sobrenomeResponsavel:string;
   RG:string;
@@ -93,12 +93,25 @@ export class RegisterPage implements OnInit {
   barStatus = false;
   imageUploads = [];
   evento: Array<any> = [];
-  
-  constructor(public services: ServiceService, private platform: Platform,private camera: Camera,
+  planos
+  hidePlanos = false
+  hideIniciar = true
+  constructor(public services: ServiceService, 
+    private platform: Platform,
+    private camera: Camera,
     private afStorage: AngularFireStorage,
-   private mediaCapture: MediaCapture,
-   private file: File,
-   private media: Media, public afStore: AngularFirestore,public storage: Storage , public loadingController: LoadingController, public afAuth: AngularFireAuth,public zone: NgZone, private modalController: ModalController, public navCtrl:NavController) {
+    private mediaCapture: MediaCapture,
+    private file: File,
+    private media: Media, 
+    public afStore: AngularFirestore,
+    public storage: Storage , 
+    public loadingController: LoadingController, 
+    public afAuth: AngularFireAuth,
+    public zone: NgZone, 
+    private modalController: ModalController, 
+    public navCtrl:NavController) {
+
+    
 
     this.moip = moipSdk({
       /*
@@ -124,7 +137,14 @@ export class RegisterPage implements OnInit {
     this.geocoder = new google.maps.Geocoder;
    }
 
+   slidesOptions = {
+    slidesPerView: 1.5
+  }
   ngOnInit() {
+    this.storage.remove('usuario')
+    this.storage.remove('id')
+    this.storage.clear()
+
     this.services.data().then(x =>{
       this.states = x;
       console.log(this.states)
@@ -169,15 +189,15 @@ export class RegisterPage implements OnInit {
     await loading.present();
   }
    authenticacao(){
-        this.presentLoading().then(() =>{
+     
+    this.segundoPasso()
+      this.presentLoading().then(() =>{
           this.presentLoading2()
-            this.services.RegisterUser(this.email, this.senha)      
-          .then((res) => {
+            this.afAuth.createUserWithEmailAndPassword(this.email2, this.senha2).then(async(res) => {
             console.log(res.user.uid)
             this.userUID = res.user.uid
-            this.storage.set('id', this.userUID).then(()=>{
-              this.segundoPasso()
-            })
+            this.segundoPasso()
+            
           }).catch((e) => {
             console.dir(e)
               var erro = this.errosFirebase.filter(i => i.code === e.code)
@@ -194,13 +214,32 @@ export class RegisterPage implements OnInit {
 
 
   }
+  plano(item){
+    console.log(item)
+    this.planos = item;
+    if(this.planos === 'entrega'){
+      if(confirm('O plano entregas está disponível apenas nos estados/cidades: RJ, SP, Campinas, Curitiba, Belo Horizonte, Recife. Se você se encontra em um desses estados, pode continuar! se não, clique em cancelar.')){
+        this.hidePlanos = true
+        this.hideIniciar = false;
+
+      }else {
+        this.hideIniciar = true;
+        this.hidePlanos = false
+
+      }
+    }else if(this.planos === 'basico'){
+      this.hidePlanos = true
+      this.hideIniciar = false;
+
+    }
+  }
   // --------- wirecard ---------- //
   contaWirecard(){
     this.presentLoading().then(() =>{ 
       this.presentLoadingMoip()   
         this.moip.account.create({
           email: {
-              address: this.email
+              address: this.email2
           },
           person: {
               name: this.nomeResponsavel,
@@ -245,10 +284,11 @@ export class RegisterPage implements OnInit {
     }) 
 
   }
+  
   // --------- dados do usuario -------- ///
   checklistUsuario(){
-    if(this.email !='' && this.email != undefined){
-      if(this.senha !='' && this.senha != undefined){
+    if(this.email2 !='' && this.email2 != undefined){
+      if(this.senha2 !='' && this.senha2 != undefined){
         if(this.nomeLoja !='' && this.nomeLoja != undefined){
           console.log('ok nome')
           if(this.CPF !='' && this.CPF != undefined){
@@ -279,8 +319,12 @@ export class RegisterPage implements OnInit {
                                   if(this.longitudeGoogle !='' &&  this.longitudeGoogle != undefined){
                                     console.log('ok lon')
                                     console.log(this.latitudeGoogle)
-    
-                                    this.finalizar()
+                                    if(this.planos === 'basico'){
+                                      this.finalizar1()
+
+                                    }else if(this.planos === 'entrega'){
+                                      this.finalizar2()
+                                    }
                                   }else{
                                     alert('Selecione um dos endereços da lista, se o seu endereço não aparece, tente outro.')
                                   } 
@@ -335,7 +379,7 @@ export class RegisterPage implements OnInit {
       alert('Preencha o campo "Email"')
     }
   }
-  async finalizar(){
+  async finalizar1(){
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Cadastrando o seu perfil...',
@@ -347,7 +391,7 @@ export class RegisterPage implements OnInit {
     
     this.afStore.doc(`users/${userid}`).set({
         nome: this.nomeLoja,
-        email: this.email,
+        email: this.email2,
         endereco: this.endereco,
         telefone: telefone,
         bairro: this.bairro,
@@ -363,13 +407,13 @@ export class RegisterPage implements OnInit {
         nomeNaConta: this.nomeNaConta,
         numeroBank: this.numeroBanco,
         optEntregas: "Não",
-        porcentagemAxe: 16,
-        porcentagemLoja: 84,
+        porcentagemAxe: 13,
+        porcentagemLoja: 87,
         accessToken: this.tokenMoip,
-        agencia: 1,
+        agencia: Number(this.agencia),
         entrega: this.horarioAbrir,
         seNao:this.horarioFechar,
-        aprovado: "Sim",
+        aprovado: "Nao",
         banco: this.nomeBanco,
         conta: this.conta,
         digitoConta:this.digitoConta,
@@ -380,11 +424,13 @@ export class RegisterPage implements OnInit {
         FotoPerfil:this.url,
         status:'Offline',   
         tipo: "Loja",
-        unidades:[],
-        CPFconta: this.CNPJconta
+        CPFconta: this.CNPJconta,
+        filiais:[]
        
        }).then(async (data)=>{
          await loading.dismiss()
+         this.storage.remove('usuario')
+
          this.quintoPasso()
        }).catch(async (e) =>{
         console.dir(e)
@@ -408,8 +454,127 @@ export class RegisterPage implements OnInit {
     
   }
 
+  async finalizar2(){
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Cadastrando o seu perfil...',
+    });
+    await loading.present();
+    const userid = this.userUID
+    var telefone = this.telefone.replace('-','')
+    console.log(telefone)
+    
+    this.afStore.doc(`users/${userid}`).set({
+        nome: this.nomeLoja,
+        email: this.email2,
+        endereco: this.endereco,
+        telefone: telefone,
+        bairro: this.bairro,
+        cidade: this.cidade,
+        lat: this.latitudeGoogle,
+        lng: this.longitudeGoogle,
+        numeroEND: this.numero,
+        CPFCNPJ: this.CPF,
+        CEP: this.cep,
+        complemento: this.complemento,
+        estado: this.estado,
+        idmoip:this.idMoip,
+        nomeNaConta: this.nomeNaConta,
+        numeroBank: this.numeroBanco,
+        optEntregas: "Não",
+        porcentagemAxe: 16,
+        porcentagemLoja: 84,
+        accessToken: this.tokenMoip,
+        agencia:  Number(this.agencia),
+        entrega: this.horarioAbrir,
+        seNao:this.horarioFechar,
+        aprovado: "Nao",
+        banco: this.nomeBanco,
+        conta: this.conta,
+        digitoConta:this.digitoConta,
+        correnteoupou: this.correnteoupou,
+        DOB:Date.now(),
+        ddd: this.ddd,
+        fcm: '1',
+        FotoPerfil:this.url,
+        status:'Offline',   
+        tipo: "Loja",
+        CPFconta: this.CNPJconta,
+        filiais:[]
+       
+       }).then(async (data)=>{
+         await loading.dismiss()
+         this.storage.remove('usuario')
+         this.quintoPasso()
+       }).catch(async (e) =>{
+        console.dir(e)
+        await loading.dismiss()
+        
+        var erro = this.errosFirebase.filter(i => i.code === e.code)
+        console.log(erro[0].message)
+        if(erro.length > 0){
+          await loading.dismiss()
   
-
+          alert('Ops!'+ erro[0].message )
+  
+        }else{
+          await loading.dismiss()
+  
+          alert('Ops!' + e )
+        }
+  
+      })
+       
+    
+  } 
+ //------- salvar filial ------ //
+ salvar(){
+  var aprovado = 'Nao'
+  var tipo = 'Loja'
+  var status = 'Offline'
+  var uid = this.userUID
+  var endereco = this.endereco
+  var cep = this.cep
+  var bairro = this.bairro
+  var complemento = this.complemento
+  var numero = this.numero
+  var cidade = this.cidade
+  var estado = this.estado
+  var lat = this.latitudeGoogle
+  var lng = this.longitudeGoogle
+  var nome = this.nomeLoja
+  var FotoPerfil = this.url
+  var entrega = this.horarioAbrir
+  var seNao = this.horarioFechar
+  const data = {
+     uid,
+     endereco,
+     cep,
+     bairro,
+     complemento,
+     numero,
+     cidade,
+     estado,
+     lat,
+     lng,
+     tipo,
+     aprovado,
+     status,
+     nome,
+     FotoPerfil,
+     entrega,
+     seNao
+ }
+  this.afStore.collection('unidades').add(data).then(data =>{
+    console.log(data.id)
+    if(data.id){
+      this.services.updateFiliais(this.userUID, data.id)
+    }
+  })
+  //this.services.updateUnidade(this.id, this.unidadeEnd, this.unidadeCEP, this.unidadeBairro,this.unidadeComple, this.unidadeNumero, this.unidadeCidade, this.unidadeEstado, this.latitudeGoogle, this.longitudeGoogle,this.loja.nome,this.loja.FotoPerfil,this.loja.entrega,this.loja.seNao)
+  this.navCtrl.pop()
+  
+}
   // --------- cidades ----------- //
 
   city(evt){
@@ -532,12 +697,14 @@ export class RegisterPage implements OnInit {
       message: 'Entrando no app...',
     });
     await loading.present();
-    this.services.getLoja(this.userUID).subscribe(data =>{
-      this.storage.set('usuario', data).then(async ( )=>{
+    this.storage.remove('usuario')
+    this.salvar()
+    this.services.getLoja(this.userUID).subscribe(async data =>{
+      //this.storage.set('usuario', data).then(async (data)=>{
         await loading.dismiss();
         this.navCtrl.navigateRoot('/home')
 
-      })
+     // })
     })
   }
 // ---------- politica ----------- //

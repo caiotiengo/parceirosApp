@@ -6,6 +6,7 @@ import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { ItemPage } from '../item/item.page';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -21,40 +22,51 @@ export class HomePage implements OnInit {
     slidesPerView: 1.5
   }
   ngOnInit() {
-    this.statusBar.overlaysWebView(false); 
-    this.statusBar.backgroundColorByHexString("#f1f5f8")
-    this.statusBar.show();
-    this.statusBar.styleLightContent();
-    this.storage.get('id').then(y => {
-      this.userID = y;
+  /*  this.userID = ''
+    const usr = firebase.default.auth().currentUser
+    console.log(usr.uid)
+      this.userID = usr.uid;
      console.log(this.userID)
+     this.storage.set('id', this.userID)
 
-      if(this.userID === null || this.userID === undefined){
-        this.navCtrl.navigateForward('')
-      }else{
-        this.services.getLoja(this.userID).subscribe(da =>{
+      if(this.userID != null || this.userID != undefined){
+        console.log(this.userID)
+        this.services.getLoja(usr.uid).subscribe(da =>{
+          console.log(this.userID)
+
           this.user = da;
-          if(this.user.tipo === "Loja"){
-            this.storage.set('usuario',this.user).then(res =>{
-              console.log(res)
-            })
-            console.log(this.user)
-          }else{
-            this.storage.clear()
-            alert('Você não tem uma conta de lojista, Baixe o App "Axé Delivery" ou cadastre sua loja na página anterior!');
-            this.navCtrl.navigateRoot('/')
-          }
-
+          console.log(this.user + this.userID)
+          this.storage.set('usuario',this.user)
+          
         })
         this.services.getVendas().subscribe(prod =>{
-          this.vendasAguardando = prod.filter(i =>i.lojaUID === this.userID && i.statusEnt === "Loja informada")
+          this.vendasAguardando = prod.filter(i =>i.lojaUID === this.userID.uid && i.statusEnt === "Loja informada")
           console.log(this.vendasAguardando)
         })
-      }
+      }else{
+        this.navCtrl.navigateRoot('')
 
+      }
+      */
+  }
+async ionViewDidEnter() {
+ // this.storage.remove('carrinhoUser')
+  if(this.router.url === '/home'){
+    this.storage.get('id').then((data) =>{
+      console.log(data)
+      this.services.getProc(data).subscribe(us =>{
+        this.user = us
+        console.log(this.user)
+      })
     })
+  }else{
+    console.log('vaxou')
   }
 
+
+
+
+}
 
   async modalItem(itens) {
     const modal = await this.modal.create({

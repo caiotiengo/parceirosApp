@@ -39,10 +39,12 @@ import { IonicStorageModule } from '@ionic/storage';
     HttpClientModule,
     BrMaskerModule,
     IonicModule.forRoot(), 
+    IonicModule.forRoot({_forceStatusbarPadding: true}),
+    IonicModule.forRoot({_forceStatusbarPadding: true}),
     AppRoutingModule,  
     IonicStorageModule.forRoot({
       name: '_myDb',
-      driverOrder: ['sqlite', 'indexeddb', 'websql', 'localstorage']
+      driverOrder: ['localstorage']
     
       })
   ],
@@ -60,7 +62,6 @@ import { IonicStorageModule } from '@ionic/storage';
     MediaCapture,
     File,
     HTTP,
-    Storage,
     Media,
     BrMaskDirective,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

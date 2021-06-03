@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { Storage } from '@ionic/storage';
 import {NavController,AlertController} from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
 declare var google;
 
 @Component({
@@ -36,7 +37,7 @@ export class AddFilialPage implements OnInit {
   loja
   states
   cidades: Array<any> = [];
-  constructor(public services: ServiceService,private storage: Storage,public navCtrl: NavController,
+  constructor(public services: ServiceService,private storage: Storage,public navCtrl: NavController,public afStore: AngularFirestore,
     public zone: NgZone) {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
                   this.autocomplete = { input: '' };
@@ -132,7 +133,49 @@ export class AddFilialPage implements OnInit {
     })
   }
   salvar(){
-    this.services.updateUnidade(this.id, this.unidadeEnd, this.unidadeCEP, this.unidadeBairro,this.unidadeComple, this.unidadeNumero, this.unidadeCidade, this.unidadeEstado, this.latitudeGoogle, this.longitudeGoogle,this.loja.nome,this.loja.FotoPerfil,this.loja.entrega,this.loja.seNao)
+    var aprovado = 'Sim'
+    var tipo = 'Loja'
+    var status = 'Online'
+    var uid = this.id
+    var endereco = this.unidadeEnd
+    var cep = this.unidadeCEP
+    var bairro = this.unidadeBairro
+    var complemento = this.unidadeComple
+    var numero = this.unidadeNumero
+    var cidade = this.unidadeCidade
+    var estado = this.unidadeEstado
+    var lat = this.latitudeGoogle
+    var lng = this.longitudeGoogle
+    var nome = this.loja.nome
+    var FotoPerfil = this.loja.FotoPerfil
+    var entrega = this.loja.entrega
+    var seNao = this.loja.seNao
+    const data = {
+       uid,
+       endereco,
+       cep,
+       bairro,
+       complemento,
+       numero,
+       cidade,
+       estado,
+       lat,
+       lng,
+       tipo,
+       aprovado,
+       status,
+       nome,
+       FotoPerfil,
+       entrega,
+       seNao
+   }
+    this.afStore.collection('unidades').add(data).then(data =>{
+      console.log(data.id)
+      if(data.id){
+        this.services.updateFiliais(this.id, data.id)
+      }
+    })
+    //this.services.updateUnidade(this.id, this.unidadeEnd, this.unidadeCEP, this.unidadeBairro,this.unidadeComple, this.unidadeNumero, this.unidadeCidade, this.unidadeEstado, this.latitudeGoogle, this.longitudeGoogle,this.loja.nome,this.loja.FotoPerfil,this.loja.entrega,this.loja.seNao)
     this.navCtrl.pop()
     
   }

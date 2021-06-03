@@ -3,17 +3,21 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 //import {Produtos} from './item/item.page';
-import firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { Platform } from '@ionic/angular';
 //import { Foto, CheckBox } from './add-proc/add-proc.page';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 
 
 export interface User {
     nome: string ;
+    filiais:any;
     endereco: string ;
     cidade: string ;
     bairro: string ;
@@ -109,7 +113,10 @@ export interface Comentario{
         nomeComprador?: any;
         nPedido?:Number;
 }
-
+export interface Filial{
+  status:any;
+  uid:any;
+}
 export interface Comentario{
   comments?: string;
   loja?: string;
@@ -174,7 +181,7 @@ export class ServiceService {
   public chatCollection: AngularFirestoreCollection<Chat>;
   public entregadorCollection: AngularFirestoreCollection<Entregador>;
   public orcamentoCollection: AngularFirestoreCollection<Orcamento>;
-
+  public filiaisCollection: AngularFirestoreCollection<Filial>;
   users: Observable<User[]>;
   cupom: Observable<Cupom[]>;
   chat: Observable<Chat[]>;
@@ -189,9 +196,9 @@ export class ServiceService {
     dislikes: number;
     proccesso;
     arrey: Array<Comentario> = [];
-
-  constructor(private afs: AngularFirestore,public ngFireAuth: AngularFireAuth,
-    private http: HttpClient, public angularFireStorage: AngularFireStorage,  public platform: Platform) {
+filial
+  constructor(private afs: AngularFirestore, private storage: Storage,public ngFireAuth: AngularFireAuth,
+    private http: HttpClient, public angularFireStorage: AngularFireStorage, public router:Router,  public platform: Platform) {
 
       // tslint:disable-next-line:indent
   	 this.userCollection = afs.collection<User>('users');
@@ -204,7 +211,7 @@ export class ServiceService {
     this.cuponsCollection = afs.collection<Cupom>('cupons')
     this.chatCollection = afs.collection<Chat>('chats')
     this.entregadorCollection = afs.collection<Entregador>('entregas')
-
+    this.filiaisCollection = afs.collection<Filial>('unidades')
     this.orcamentoCollection = afs.collection<Orcamento>('orcamento')
     this.getUsers();
       // tslint:disable-next-line:indent
@@ -213,6 +220,16 @@ export class ServiceService {
 
 
   }
+  getFiliais() {
+    return this.filial = this.filiaisCollection.snapshotChanges().pipe(
+         map(actions => actions.map(a => {
+             const data = a.payload.doc.data() as Filial;
+             const id = a.payload.doc.id;
+             return { id, ...data };
+         }))
+
+     );
+ }
   getUsers() {
      return this.users = this.userCollection.snapshotChanges().pipe(
           map(actions => actions.map(a => {
@@ -386,20 +403,34 @@ export class ServiceService {
     });
    }
    // Login in with email/password
-  SignIn(email, password) {
-    return this.ngFireAuth.signInWithEmailAndPassword(email, password)
+  async SignIn(email, password) {
+    return await this.ngFireAuth.signInWithEmailAndPassword(email, password)
   }
 
   // Register user with email/password
-  RegisterUser(email, password) {
-    return this.ngFireAuth.createUserWithEmailAndPassword(email, password)
+  async RegisterUser(email2, password2) {
+    return await this.ngFireAuth.createUserWithEmailAndPassword(email2, password2)
+  }
+
+  async logout(){
+    
+    return await this.ngFireAuth.signOut().then((res) => {
+      console.log(res)
+      localStorage.removeItem('usuario');
+      localStorage.removeItem('id');
+      this.storage.remove('usuario')
+      this.storage.remove('id')
+    })
   }
 
   deleteUnidade(id:string,item:any){
-   this.userCollection.doc<User>(id).update({unidades: firebase.firestore.FieldValue.arrayRemove(item)})  
+   this.userCollection.doc<User>(id).update({filiais: firebase.default.firestore.FieldValue.arrayRemove(item)})  
   }
+  deleteFilial(id:string,){
+    this.filiaisCollection.doc<Filial>(id).delete()
+   }
   updateUnidade(id:string, endereco: string, cep:string, bairro:string,complemento:string, numero:any, cidade:string, estado:string, lat:string,lng:string,nome:string,FotoPerfil:string,entrega:string,seNao:string){
-    const {uid} = firebase.auth().currentUser;
+    const {uid} = firebase.default.auth().currentUser;
     var aprovado = 'Sim'
     var tipo = 'Loja'
     var status = 'Online'
@@ -422,7 +453,13 @@ export class ServiceService {
        entrega,
        seNao
    }
-    this.userCollection.doc<User>(id).update({unidades: firebase.firestore.FieldValue.arrayUnion(data)})  
+    this.userCollection.doc<User>(id).update({unidades: firebase.default.firestore.FieldValue.arrayUnion(data)})  
+}
+updateFiliais(id:string, idFilial:string){
+  const data ={
+    idFilial
+  }
+  this.userCollection.doc<User>(id).update({filiais: firebase.default.firestore.FieldValue.arrayUnion(data)})
 }
   addUser(user: User) {
     this.userCollection.add(user);
@@ -438,7 +475,13 @@ export class ServiceService {
   	return this.user.email;
   }
   getProc(id: string) {
-    return this.userCollection.doc<User>(id).valueChanges();
+    if(this.router.url === '/home'){
+      return this.userCollection.doc<User>(id).valueChanges();
+
+    }else{
+      console.log('haha')
+      
+    }
   }
   getStatusProd(id: string) {
     return this.vendasCollection.doc<Vendas>(id).valueChanges();
@@ -504,7 +547,7 @@ updateEnd(id: string, tipo:string, end: string, cep:string, bairro:string,comple
     this.orcamentoCollection.doc<Orcamento>(id).update({chat:idChat})
   }
   deleteOrcamento(id:string,item:any){
-    this.orcamentoCollection.doc<Orcamento>(id).update({orcamento: firebase.firestore.FieldValue.arrayRemove(item)})  
+    this.orcamentoCollection.doc<Orcamento>(id).update({orcamento: firebase.default.firestore.FieldValue.arrayRemove(item)})  
    }
   updateOrcamentoVal(id:string, price:number, valor:string, produtos:any, valorHTM:string){
     //const data = produtos;
@@ -522,22 +565,22 @@ updateEnd(id: string, tipo:string, end: string, cep:string, bairro:string,comple
 
   }
   updateChat(id:string,conteudo:string){
-      const {uid} = firebase.auth().currentUser;
+      const {uid} = firebase.default.auth().currentUser;
       const data = {
          uid,
          conteudo,
          criadoEm: Date.now()
      }
-      this.chatCollection.doc<Chat>(id).update({mensagens: firebase.firestore.FieldValue.arrayUnion(data)})  
+      this.chatCollection.doc<Chat>(id).update({mensagens: firebase.default.firestore.FieldValue.arrayUnion(data)})  
   }
   updateCupom(id:string,cupom:string){
-    const {uid} = firebase.auth().currentUser;
+    const {uid} = firebase.default.auth().currentUser;
     const data = {
        uid,
        cupom,
        usadoEm: Date.now()
    }
-    this.userCollection.doc<User>(id).update({cupons: firebase.firestore.FieldValue.arrayUnion(data)})  
+    this.userCollection.doc<User>(id).update({cupons: firebase.default.firestore.FieldValue.arrayUnion(data)})  
 }
   updateVendas(id:string, chatId:string){
     this.vendasCollection.doc<Vendas>(id).update({chat: chatId})
@@ -578,6 +621,11 @@ updateEnd(id: string, tipo:string, end: string, cep:string, bairro:string,comple
   }
   updateStatus(id:string, opc: string){
     this.userCollection.doc<User>(id).update({
+      status: opc
+    })
+  }
+  updateFilialStatus(id:string, opc: string){
+    this.filiaisCollection.doc<Filial>(id).update({
       status: opc
     })
   }

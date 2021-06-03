@@ -11,6 +11,8 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {HttpClient} from '@angular/common/http';
 import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 declare var google;
 
@@ -49,6 +51,7 @@ export class UserPage implements OnInit {
   procUser;
   public goalList: any[];
   public loadedGoalList: any[];
+  mainuser: AngularFirestoreDocument;
   processos;
   typeUser;
   currentGoale;
@@ -116,9 +119,11 @@ export class UserPage implements OnInit {
   unidadeCidade
   unidadez
   aprovado
+  filiais
+  filiaz
   constructor(public loadingController: LoadingController,public navCtrl: NavController, private storage: Storage,
-    public afStore: AngularFirestore, 
-    public modalController: ModalController,
+    public afStore: AngularFirestore, public afAuth: AngularFireAuth,
+    public modalController: ModalController, public router:Router,
       public services: ServiceService,private formBuilder: FormBuilder,private geolocation: Geolocation,private http: HttpClient, public zone: NgZone, 
       public alertCtrl: AlertController,private push:Push) { 
 
@@ -148,13 +153,23 @@ export class UserPage implements OnInit {
   }
 
   async start(){
+    const user = firebase.default.auth().currentUser;
+    console.log(user);
+    if (user) {
+            this.mainuser = this.afStore.doc(`users/${user.uid}`);
+               this.userID = user.uid
+               // this.storage.set('usuarioUID', this.userID)
+              } else {
+
+      }
     const loading = await this.loadingController.create({
       message: 'Carregando...'
     });
     await loading.present();
     this.storage.get('id').then(data =>{
       this.userID = data;
-      this.services.getLoja(this.userID).subscribe(event => {
+      console.log(this.userID)
+      this.sub = this.mainuser.valueChanges().subscribe((event) => {
         this.nome = event.nome;
         this.endereco = event.endereco;
         this.cidade = event.cidade;
@@ -177,16 +192,18 @@ export class UserPage implements OnInit {
         this.complemento = event.complemento
         this.unidadez = event.unidades
         this.aprovado = event.aprovado
+        this.filiais = event.filiais
         
-        this.services.data2().then( async data =>{
-          this.bancos = data;
-          this.banks = data;
-          console.log(this.bancos)
-          await loading.dismiss();
-        })
+  
       });
     })
- 
+    this.services.data2().then( async data =>{
+      this.bancos = data;
+      this.banks = data;
+      console.log(this.bancos)
+      await loading.dismiss();
+    })
+    
   }
 
   updateBusca(item){
@@ -272,11 +289,21 @@ export class UserPage implements OnInit {
   // --------- abrir e fechar lojas -------- //
 
   abrirLoja(){
+    this.filiais.forEach(element => {
+      console.log(element.idFilial)
+      var opc = "Online"
+      this.services.updateFilialStatus(element.idFilial,opc)  
+    });
     var opc = "Online"
     this.services.updateStatus(this.userID,opc)
-
+    
   }
   fecharLoja(){
+    this.filiais.forEach(element => {
+      console.log(element.idFilial)
+      var opc = "Offline"
+      this.services.updateFilialStatus(element.idFilial,opc)  
+    });
     var opc = "Offline"
     this.services.updateStatus(this.userID,opc)
     
@@ -315,12 +342,41 @@ export class UserPage implements OnInit {
   }
 
   sair() {
-    this.storage.remove('usuario')
-    this.storage.clear().then(() =>{
-      this.navCtrl.navigateRoot('/');
+    this.services.logout().then(()=>{
+      console.log('trem')
+      this.afAuth.signOut().then((res) =>{
+        console.log(res + '  oi')
+        firebase.default.auth().signOut().then((res) =>{
+          console.log('em ' + res)
+          setTimeout(() => {
+            if(confirm('Deseja realmente sair?')){
+              this.services.logout().then(()=>{
+                console.log('trem')
+                this.afAuth.signOut().then((res) =>{
+                  console.log(res + '  oi')
+                  firebase.default.auth().signOut().then((res) =>{
+                    console.log('em ' + res)
+                    this.router.navigate(['/']);
+          
+                  })
+                })
+          
+              })
+      
+            }else {
+              
+      
+            }
+          
+          alert('loginout')
+          }, 5000);
+        })
+      })
 
-    });
+    })
+     
     
+   
   }
   vaiProdutos(){
     this.navCtrl.navigateForward('/produtos')
@@ -329,7 +385,9 @@ export class UserPage implements OnInit {
   // ------ deletar unit ----- //
 
   pedirDele(item){
-    this.services.deleteUnidade(item.uid,item)
+    console.log(item)
+    console.log(item.id)
+    this.services.deleteFilial(item.id)
   }
 
 }

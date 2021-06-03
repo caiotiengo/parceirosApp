@@ -14,15 +14,6 @@ export class AppComponent {
   constructor( private platform: Platform,
     private splashScreen: SplashScreen,private storage: Storage, 
     private statusBar: StatusBar,private push: Push, private services: ServiceService) {
-    this.initializeApp()
   }
-  initializeApp(){
-    this.platform.ready().then(() => {
-      this.splashScreen.hide();
-      this.statusBar.show()
-
-      this.statusBar.overlaysWebView(true);
-    })
- 
-  }
+  
 }

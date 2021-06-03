@@ -27,9 +27,79 @@
     </ion-fab-button>
   </ion-fab>
   <div [hidden]="started" class="header-page">
-    <h4>Vamos iniciar o cadastro da sua loja...</h4>
-    <p>São 4 passos para finalizar o cadastro!</p>
-    <ion-button expand="block" (click)="primeiroPasso()" color="axe">Começar</ion-button>
+    <ion-grid [hidden]="hidePlanos">
+      <h6>Selecione um dos planos abaixo.</h6>
+      <ion-col>
+        <ion-row>
+          <ion-slides [options]="slidesOptions">
+            <ion-slide>
+              <ion-card (click)="plano('basico')">
+                <ion-card-header>
+                  <div class="main">
+                    <ion-icon style="font-size: 40px;" name="pricetags"></ion-icon>
+                  </div>
+                </ion-card-header>
+                <ion-card-content class="ion-text-left">
+                  <ion-card-title  style="font-size: large;"class="ion-margin-bottom">Plano básico</ion-card-title>
+        
+                  <ion-card-subtitle style=" bottom: -5px;" class="ion-text-right">
+                    <p>Entregas feitas pelo lojista</p>
+                    <br/>
+
+                    <p>Comissão de 13% por vendas no app </p>
+                    <br/>
+                    <p>Mensalidade de R$29,90 depois de 6 meses</p>
+
+                  </ion-card-subtitle>
+                  <p style="    font-weight: bold;
+                  color: white;
+                  margin-top: 10%;
+                  text-align: center;
+                  background: red;
+                  border-radius: 5px;
+                  padding: 5px;">Disponível para todo o Brasil</p>
+
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+            <ion-slide>
+              <ion-card (click)="plano('entrega')">
+                <ion-card-header>
+                  <div class="main">
+                    <ion-icon style="font-size: 40px;" name="bicycle"></ion-icon>
+                  </div>
+                </ion-card-header>
+                <ion-card-content class="ion-text-left">
+                  <ion-card-title  style="font-size: large;"class="ion-margin-bottom">Plano entrega</ion-card-title>
+        
+                  <ion-card-subtitle style=" bottom: -5px;" class="ion-text-right">
+                    <p>Entregas feitas pelo Axé Delivery</p>
+                    <br/>
+
+                    <p>Comissão de 16% por vendas no app </p>
+                    <br/>
+                    <p>Mensalidade de R$29,90 depois de 6 meses</p>
+                   
+                  </ion-card-subtitle>
+                  <p style="    font-weight: bold;
+                  color: white;
+                  margin-top: 10%;
+                  text-align: center;
+                  background: red;
+                  border-radius: 5px;
+                  padding: 5px;">Disponível para algumas cidades</p>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-row>
+      </ion-col>
+    </ion-grid>
+    <div [hidden]="hideIniciar">
+      <h4>Vamos iniciar o cadastro da sua loja?</h4>
+      <p>São 4 passos para finalizar o cadastro!</p>
+      <ion-button expand="block" (click)="primeiroPasso()" color="axe">Começar</ion-button>
+    </div>
   </div>
   <div [hidden]="primeiraDiv" class="primeira-div">
     <div class="header-primeira">
@@ -39,13 +109,13 @@
     </div>
     <div class="email-div">
       <label for="email" class="email">E-mail</label>
-      <input type="email" [(ngModel)]="email" placeholder="Digite aqui o e-mail da sua loja..." class="emailInput">
-      <label *ngIf="email === undefined || email === ''" class="required">* E-mail é obrigatório </label>
+      <input type="email" [(ngModel)]="email2" placeholder="Digite aqui o e-mail da sua loja..." class="emailInput">
+      <label *ngIf="email2 === undefined || email2 === ''" class="required">* E-mail é obrigatório </label>
     </div>
     <div class="senha-div">
       <label for="senha" class="senha">Senha</label>
-      <input type="password" [(ngModel)]="senha"  placeholder="Digite aqui a senha da sua loja..." class="senhaInput">
-      <label *ngIf="senha === undefined || senha === ''" class="required">* Senha é obrigatório </label>
+      <input type="password" [(ngModel)]="senha2"  placeholder="Digite aqui a senha da sua loja..." class="senhaInput">
+      <label *ngIf="senha2 === undefined || senha2 === ''" class="required">* Senha é obrigatório </label>
     </div>
     <ion-button expand="block" (click)="authenticacao()" color="axe">Próximo</ion-button>
 
@@ -217,16 +287,21 @@
       <label *ngIf="CNPJ === undefined || CNPJ === ''" class="required">* CNPJ é obrigatório </label>
 
     </div>
-    <ion-select placeholder="Escolha se é Corrente ou Poupança"  [(ngModel)]="correnteoupou">
-      <ion-select-option value="Corrente">Corrente</ion-select-option>
-      <ion-select-option value="Poupanca">Poupança</ion-select-option>
-    </ion-select>
+    <div class="input-div">
+      <label for="tipo" class="banco">Tipo de conta</label>
+
+      <ion-select id="tipo" placeholder="Escolha se é Corrente ou Poupança"  [(ngModel)]="correnteoupou">
+        <ion-select-option value="Corrente">Corrente</ion-select-option>
+        <ion-select-option value="Poupanca">Poupança</ion-select-option>
+      </ion-select>
+    </div>
+    
     <label *ngIf="correnteoupou === undefined || correnteoupou === ''" class="required">* Tipo de conta é obrigatório </label>
 
     <div class="input-div">
       <label for="banco" class="banco">Banco</label>
       <input placeholder="Digite aqui o seu Banco..." [(ngModel)]="banco" value={{nomeBanco}} (keyup)="buscaBanco($event)" type="text">
-      <label *ngIf="banco === undefined || banco === ''" class="required">* Agência é obrigatório </label>
+      <label *ngIf="banco === undefined || banco === ''" class="required">* Banco é obrigatório </label>
 
     </div>
       <!-- -->  
@@ -244,7 +319,7 @@
     <div class="input-div">
       <label for="cnpj" class="cnpj">CNPJ ou CPF da conta</label>
       <input placeholder="Digite aqui o CPF ou CNPJ da conta..." [(ngModel)]="CNPJconta" minlength="40" [brmasker]="{person: true}"  type="text">
-      <label *ngIf="CNPJconta === undefined || CNPJconta === ''" class="required">* Agência é obrigatório </label>
+      <label *ngIf="CNPJconta === undefined || CNPJconta === ''" class="required">* CNPJ ou CPF  é obrigatório </label>
 
     </div>	
     <div class="input-div">
