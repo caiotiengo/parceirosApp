@@ -342,39 +342,7 @@ export class UserPage implements OnInit {
   }
 
   sair() {
-    this.services.logout().then(()=>{
-      console.log('trem')
-      this.afAuth.signOut().then((res) =>{
-        console.log(res + '  oi')
-        firebase.default.auth().signOut().then((res) =>{
-          console.log('em ' + res)
-          setTimeout(() => {
-            if(confirm('Deseja realmente sair?')){
-              this.services.logout().then(()=>{
-                console.log('trem')
-                this.afAuth.signOut().then((res) =>{
-                  console.log(res + '  oi')
-                  firebase.default.auth().signOut().then((res) =>{
-                    console.log('em ' + res)
-                    this.router.navigate(['/']);
-          
-                  })
-                })
-          
-              })
-      
-            }else {
-              
-      
-            }
-          
-          alert('loginout')
-          }, 5000);
-        })
-      })
-
-    })
-     
+    this.router.navigate(['/']);
     
    
   }

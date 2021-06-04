@@ -13,8 +13,6 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
-
-
 export interface User {
     nome: string ;
     filiais:any;

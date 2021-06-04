@@ -14,7 +14,7 @@ export class IntroPage implements OnInit {
   }
   
   telaLogin(){
-    this.navCtrl.navigateForward('/root')
+    this.navCtrl.navigateForward('/login')
   }
   telaCadastro(){
     this.navCtrl.navigateForward('/register')

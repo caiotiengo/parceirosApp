@@ -3,7 +3,7 @@ import { NavController, ModalController } from '@ionic/angular';
 import { ModalPassosPage } from '../modal-passos/modal-passos.page';
 import { Storage } from '@ionic/storage';
 import { ServiceService } from '../service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemPage } from '../item/item.page';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase';
@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   userID:any;
   user:any;
   vendasAguardando:any;
-  constructor(private statusBar: StatusBar,public navCtrl: NavController,public router:Router,public services:ServiceService, public storage: Storage, public modal:ModalController) { }
+  constructor(private statusBar: StatusBar,public route: ActivatedRoute, public navCtrl: NavController,public router:Router,public services:ServiceService, public storage: Storage, public modal:ModalController) { }
   slidesOptions = {
     slidesPerView: 1.5
   }
@@ -51,18 +51,20 @@ export class HomePage implements OnInit {
   }
 async ionViewDidEnter() {
  // this.storage.remove('carrinhoUser')
-  if(this.router.url === '/home'){
-    this.storage.get('id').then((data) =>{
-      console.log(data)
-      this.services.getProc(data).subscribe(us =>{
-        this.user = us
-        console.log(this.user)
-      })
-    })
-  }else{
-    console.log('vaxou')
+ var x = this.route.snapshot.paramMap.get('id');
+ this.storage.set('id', x)
+ console.log(x)
+ if(x != null){
+   this.services.getLoja(x).subscribe(us =>{
+     this.user = us
+       console.log(this.user)
+   })
+   this.services.getVendas().subscribe(prod =>{
+    this.vendasAguardando = prod.filter(i =>i.lojaUID === x && i.statusEnt === "Loja informada")
+    console.log(this.vendasAguardando)
+  })
+   
   }
-
 
 
 

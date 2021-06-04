@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { interval } from 'rxjs';
+import { Router } from '@angular/router';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -366,7 +367,7 @@ export class LoginPage implements OnInit {
   mainuser: AngularFirestoreDocument;
   userID
   FCM
-  constructor(public loadingController: LoadingController,public afStore: AngularFirestore,public afAuth: AngularFireAuth,public services: ServiceService,public storage: Storage,public navCtrl:NavController) {
+  constructor(public loadingController: LoadingController,public router: Router,public afStore: AngularFirestore,public afAuth: AngularFireAuth,public services: ServiceService,public storage: Storage,public navCtrl:NavController) {
    }
 
   ngOnInit() {
@@ -405,10 +406,7 @@ export class LoginPage implements OnInit {
          const user = firebase.default.auth().currentUser;
          this.mainuser = this.afStore.doc(`users/${user.uid}`);
          this.userID = user.uid
-         console.log(this.userID)
-         this.storage.set('id',this.userID).then((res) =>{
-            console.log(res)
-        });
+         this.storage.set('id', this.userID)
          this.mainuser.valueChanges().subscribe(event => {
             console.log(event)
             if(this.FCM === undefined){
@@ -418,13 +416,19 @@ export class LoginPage implements OnInit {
 
             }
             if(event.tipo === 'user'){
-                alert('Mudou tudo! Parceiro Axé! agora você conta com um app exclusivo seu... Baixe agora o App "Parceiros Axé" para ter acesso a sua loja!')
+                alert('Mudou tudo! Baixe agora o APP "Axé Delivery" se você ainda tem uma conta de cliente! Aqui, somente lojista tem acesso!')
+                this.email = ''
+                this.senha = ''
+                this.mainuser = null
+                location.reload()
+                return false
             }else{
-                this.storage.set('usuario', event).then(() =>{
+                this.storage.set('usuario', event)
+
                     //this.showalert('Bem-vindo de volta!', 'Vamos as compras!?');
-                    this.navCtrl.navigateRoot('/home');
+            this.router.navigate(['/home', this.userID])
+
                      
-                  })
                         
             }
 
