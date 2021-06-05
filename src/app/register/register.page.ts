@@ -432,6 +432,7 @@ export class RegisterPage implements OnInit {
          this.storage.remove('usuario')
 
          this.quintoPasso()
+         this.entrarNoApp()
        }).catch(async (e) =>{
         console.dir(e)
         await loading.dismiss()
@@ -506,6 +507,8 @@ export class RegisterPage implements OnInit {
          await loading.dismiss()
          this.storage.remove('usuario')
          this.quintoPasso()
+         this.entrarNoApp()
+
        }).catch(async (e) =>{
         console.dir(e)
         await loading.dismiss()
@@ -694,18 +697,19 @@ export class RegisterPage implements OnInit {
   async entrarNoApp(){
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Entrando no app...',
+      message: 'Finalizando cadastro...',
     });
     await loading.present();
     this.storage.remove('usuario')
     this.salvar()
-    this.services.getLoja(this.userUID).subscribe(async data =>{
+    alert('Cadastro finalizado!')
+   // this.services.getLoja(this.userUID).subscribe(async data =>{
       //this.storage.set('usuario', data).then(async (data)=>{
         await loading.dismiss();
-        this.navCtrl.navigateRoot('/home')
+        //this.navCtrl.navigateRoot('/home')
 
      // })
-    })
+   // })
   }
 // ---------- politica ----------- //
 
